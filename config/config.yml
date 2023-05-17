@@ -1,0 +1,12 @@
+server:
+  domain: "http://localhost:4000"
+  port: 4000
+
+database:
+  host: "localhost"
+  port: 5432
+  name: "pronace"
+  user: "postgres"
+  password: "postgres"
+  migrate: true
+  seed: true
