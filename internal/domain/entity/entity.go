@@ -1,10 +1,47 @@
-package models
+package entity
 
 import (
 	"time"
 
 	"gorm.io/gorm"
 )
+
+type Encuestador struct {
+	gorm.Model
+	UserName string `gorm:"uniqueIndex;not null"`
+	Password string `gorm:"not null"`
+	Email    string `gorm:"uniqueIndex;not null"`
+}
+
+type Habitantes struct {
+	gorm.Model
+	EncuestadorID    uint
+	Encuestado       bool   `gorm:"not null"`
+	ViviendaId       uint   `gorm:"not null"`
+	Sexo             string `gorm:"not null"`
+	Edad             int    `gorm:"not null"`
+	Fumador          bool   `gorm:"not null"`
+	TiempoResidencia int    `gorm:"not null"`
+	EscolaridadId    uint   `gorm:"not null"`
+	OcupacionId      uint   `gorm:"not null"`
+}
+
+type Escolaridad struct {
+	gorm.Model
+	Escolaridad    string `gorm:"not null"`
+	Trunca         bool   `gorm:"not null"`
+	NoEscolorizado bool   `gorm:"not null"`
+	NoAplica       bool   `gorm:"not null"`
+}
+
+type Ocupacion struct {
+	gorm.Model
+	Ocupacion     string `gorm:"not null"`
+	Remunerado    bool   `gorm:"not null"`
+	HorasPorDia   int    `gorm:"not null"`
+	DiasPorSemana int    `gorm:"not null"`
+	NoAplica      bool   `gorm:"not null"`
+}
 
 type Vivienda struct {
 	gorm.Model
@@ -131,4 +168,33 @@ type Formacos struct {
 	MotivoRecabado string `gorm:"not null"`
 	Meses          int    `gorm:"not null"`
 	CIE10          string `gorm:"not null"`
+}
+
+type Ciudad struct {
+	gorm.Model
+	ViviendaId    uint   `gorm:"not null"`
+	Problema      bool   `gorm:"not null"`
+	Descripcion   string `gorm:"not null"`
+	Contaminacion bool   `gorm:"not null"`
+	Tipo          string `gorm:"not null"`
+}
+
+type DonadorSangre struct {
+	gorm.Model
+	ViviendaId uint `gorm:"not null"`
+	Donador    bool `gorm:"not null"`
+	Antiguedad int  `gorm:"not null"`
+	NoAplica   bool `gorm:"not null"`
+}
+
+type RegistrosViviendas struct {
+	gorm.Model
+	ViviendaId      uint `gorm:"not null"`
+	Manzana         int  `gorm:"not null"`
+	Atendio         bool `gorm:"not null"`
+	Deshabitada     bool `gorm:"not null"`
+	Baldio          bool `gorm:"not null"`
+	Local           bool `gorm:"not null"`
+	EnConstrucccion bool `gorm:"not null"`
+	Otro            bool `gorm:"not null"`
 }

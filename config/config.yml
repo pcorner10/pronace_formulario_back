@@ -5,8 +5,8 @@ server:
 database:
   host: "localhost"
   port: 5432
-  name: "pronace"
+  name: "pronaces"
   user: "postgres"
-  password: "postgres"
+  password: "root"
   migrate: true
   seed: true
