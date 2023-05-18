@@ -1,43 +1,16 @@
+// internal\domain\repository\user_repository.go
+
 package repository
 
-import (
-	"errors"
-	"pronaces_back/internal/domain/entity"
-	"pronaces_back/internal/infraestructure/utility"
+import "pronaces_back/internal/domain/entity"
 
-	"gorm.io/gorm"
-)
-
+// UserRepository define las operaciones para acceder y manipular los datos de los usuarios
 type UserRepository interface {
-	FindUserByEmail(email string) (*entity.User, error)
-	ValidateUser(email string, password string) (*entity.User, error)
+	Create(user *entity.User) error
+	GetByEmail(email string) (*entity.User, error)
+	Update(user *entity.User) error
+	Delete(userID uint64) error
 }
 
 type userRepository struct {
-	dbHandler *gorm.DB
-}
-
-func NewUserRepository(dbHandler *gorm.DB) UserRepository {
-	return &userRepository{
-		dbHandler: dbHandler,
-	}
-}
-
-func (r *userRepository) FindUserByEmail(email string) (*entity.User, error) {
-
-	return nil, nil
-}
-
-func (r *userRepository) ValidateUser(email string, password string) (*entity.User, error) {
-	user, err := r.FindUserByEmail(email)
-
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, errors.New("user not found")
-	}
-
-	if !utility.CheckPassword(password, user.Password) {
-		return nil, errors.New("invalid password")
-	}
-
-	return user, nil
 }

@@ -1,0 +1,43 @@
+New-Item "app" -Type Directory
+New-Item "app/handler" -Type Directory
+New-Item "app/handler/auth_handler.go"
+New-Item "app/handler/form_handler.go" 
+
+New-Item "app/repository" -Type Directory
+New-Item "app/repository/user_repository.go" 
+New-Item "app/repository/form_repository.go"
+
+New-Item "app/service" -Type Directory
+New-Item "app/service/auth_service.go"
+New-Item "app/service/form_service.go"
+
+New-Item "app/usercase" -Type Directory
+New-Item "app/usercase/auth_usecase.go"
+New-Item "app/usercase/form_usecase.go"
+
+New-Item "domain" -Type Directory
+New-Item "domain/entity" -Type Directory
+New-Item "domain/entity/user.go"
+New-Item "domain/entity/form.go"
+
+New-Item "domain/repository" -Type Directory
+New-Item "domain/repository/user_repository.go"
+New-Item "domain/repository/form_repository.go"
+
+New-Item "domain/service" -Type Directory
+New-Item "domain/service/auth_service.go"
+New-Item "domain/service/form_service.go"
+
+New-Item "infraestructure" -Type Directory
+New-Item "infraestructure/database" -Type Directory
+New-Item "infraestructure/database/postgres.go"
+
+New-Item "infraestructure/http" -Type Directory
+New-Item "infraestructure/http/server.go"
+
+New-Item "infraestructure/orm" -Type Directory
+New-Item "infraestructure/orm/gorm.go"
+
+
+
+New-Item "handler.go" 

@@ -2,7 +2,7 @@ package api
 
 import (
 	"pronaces_back/config"
-	"pronaces_back/database"
+	"pronaces_back/internal/infraestructure/database"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -17,7 +17,7 @@ func Start(port string) {
 	}
 
 	r := gin.Default()
-	SetupRoutes(r)
+	SetupRoutes(r, dbHandler)
 
 	r.Run(":" + port)
 }
