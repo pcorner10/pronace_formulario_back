@@ -13,7 +13,7 @@ func Migrate(db *gorm.DB) {
 		&entity.AguaPotable{}, &entity.ProblemasSalud{}, &entity.Fallecimientos{},
 		&entity.Cancer{}, &entity.Embarazo{}, &entity.PerdidaEmbarazo{},
 		&entity.Parto{}, &entity.Discapacidad{}, &entity.Tratamiento{},
-		&entity.Formacos{}, &entity.Ciudad{}, &entity.DonadorSangre{},
+		&entity.Farmacos{}, &entity.Ciudad{}, &entity.DonadorSangre{},
 		&entity.RegistrosViviendas{},
 	)
 

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
@@ -18,4 +19,6 @@ func Init() {
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file: %v", err)
 	}
+
+	fmt.Println("Using config file:", viper.ConfigFileUsed())
 }

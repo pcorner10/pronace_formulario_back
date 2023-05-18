@@ -1,22 +1,17 @@
 package api
 
 import (
-	"pronaces_back/config"
-	"pronaces_back/internal/infraestructure/database"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
+	"gorm.io/gorm"
 )
 
-func Start(port string) {
-	config.Init()
-	dbHandler := database.Init()
-
-	if viper.GetBool("database.migrate") {
-		database.Migrate(dbHandler)
-	}
+func Start(port string, dbHandler *gorm.DB) {
+	fmt.Println("Starting server at port " + port)
 
 	r := gin.Default()
+
 	SetupRoutes(r, dbHandler)
 
 	r.Run(":" + port)
