@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 	usecase "pronaces_back/internal/app/usecase"
+	"pronaces_back/internal/domain/entity"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,4 +38,25 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 
 	// Devolver token de autenticación
 	ctx.JSON(http.StatusOK, gin.H{"token": token})
+}
+
+func (h *AuthHandler) Register(ctx *gin.Context) {
+	// Leer datos del cuerpo de la petición
+	var credentials = &entity.User{}
+
+	err := ctx.BindJSON(&credentials)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Registrar usuario
+	err = h.AuthUseCase.Register(credentials)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Devolver token de autenticación
+	ctx.JSON(http.StatusOK, gin.H{"message": "user created"})
 }

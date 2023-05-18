@@ -23,6 +23,7 @@ func SetupRoutes(router *gin.Engine, dbHandler *gorm.DB) {
 	public := router.Group("/public")
 	{
 		public.POST("/login", authHandler.Login)
+		public.POST("/register", authHandler.Register)
 	}
 
 	private := router.Group("/api")

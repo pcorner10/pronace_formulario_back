@@ -38,6 +38,20 @@ func (u *AuthUseCase) Login(email, password string) (string, error) {
 	return token, nil
 }
 
-func (u *AuthUseCase) CreateUser(user *entity.User) error {
+func (u *AuthUseCase) Register(user *entity.User) error {
+	// Verificar si el usuario ya existe
+	_, err := u.userRepository.GetByEmail(user.Email)
+	if err == nil {
+		return errors.New("user already exists")
+	}
+
+	// Encriptar contraseña
+	Password, err := service.HashPassword(user.Password)
+	if err != nil {
+		return err
+	}
+
+	user.Password = Password
+
 	return u.userRepository.Create(user)
 }
