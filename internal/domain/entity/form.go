@@ -6,21 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Habitantes struct {
-	gorm.Model
-	EncuestadorID    uint
-	Encuestado       bool        `gorm:"not null"`
-	ViviendaID       uint        `gorm:"not null"`
-	Sexo             string      `gorm:"not null"`
-	Edad             int         `gorm:"not null"`
-	Fumador          bool        `gorm:"not null"`
-	TiempoResidencia int         `gorm:"not null"`
-	EscolaridadId    uint        `gorm:"not null"`
-	OcupacionId      uint        `gorm:"not null"`
-	Escolaridad      Escolaridad `gorm:"foreignKey:ID"`
-	Ocupacion        Ocupacion   `gorm:"foreignKey:ID"`
-}
-
 type Escolaridad struct {
 	gorm.Model
 	Escolaridad    string `gorm:"not null"`
@@ -36,38 +21,6 @@ type Ocupacion struct {
 	HorasPorDia   int    `gorm:"not null"`
 	DiasPorSemana int    `gorm:"not null"`
 	NoAplica      bool   `gorm:"not null"`
-}
-
-type Vivienda struct {
-	gorm.Model
-	Electricidad          bool              `gorm:"not null"`
-	FuenteAgua            string            `gorm:"not null"`
-	Gas                   bool              `gorm:"not null"`
-	BanoInterno           bool              `gorm:"not null"`
-	ExtraccionAguasNegras string            `gorm:"not null"`
-	MaterialTecho         string            `gorm:"not null"`
-	MaterialParades       string            `gorm:"not null"`
-	MaterialPiso          string            `gorm:"not null"`
-	NoHabitaciones        int               `gorm:"not null"`
-	OloresDesagradables   bool              `gorm:"not null"`
-	DescripcionOlores     string            `gorm:"not null"`
-	ZonaID                uint              `gorm:"not null"`
-	Zona                  Zona              `gorm:"foreignKey:ViviendaID"`
-	Habitantes            []Habitantes      `gorm:"foreignKey:ViviendaID" json:"-"`
-	AguaPotableID         uint              `gorm:"not null"`
-	AguaPotable           AguaPotable       `gorm:"foreignKey:AguaPotableID"`
-	ProblemasSalud        []ProblemasSalud  `gorm:"foreignKey:ViviendaID" json:"-"`
-	Fallecimientos        []Fallecimientos  `gorm:"foreignKey:ViviendaID" json:"-"`
-	Cancer                []Cancer          `gorm:"foreignKey:ViviendaID" json:"-"`
-	Embarazo              []Embarazo        `gorm:"foreignKey:ViviendaID" json:"-"`
-	PerdidaEmbarazo       []PerdidaEmbarazo `gorm:"foreignKey:ViviendaID" json:"-"`
-	Parto                 []Parto           `gorm:"foreignKey:ViviendaID" json:"-"`
-	Discapacidad          []Discapacidad    `gorm:"foreignKey:ViviendaID" json:"-"`
-	Tratamiento           []Tratamiento     `gorm:"foreignKey:ViviendaID" json:"-"`
-	Farmacos              []Farmacos        `gorm:"foreignKey:ViviendaID" json:"-"`
-	CiudadID              uint              `gorm:"not null"`
-	Ciudad                Ciudad            `gorm:"foreignKey:CiudadID" json:"-"`
-	DonadorSangre         []DonadorSangre   `gorm:"foreignKey:ViviendaID" json:"-"`
 }
 
 type Zona struct {
@@ -208,4 +161,51 @@ type RegistrosViviendas struct {
 	Local           bool `gorm:"not null"`
 	EnConstrucccion bool `gorm:"not null"`
 	Otro            bool `gorm:"not null"`
+}
+
+type Vivienda struct {
+	gorm.Model
+	Electricidad          bool              `gorm:"not null"`
+	FuenteAgua            string            `gorm:"not null"`
+	Gas                   bool              `gorm:"not null"`
+	BanoInterno           bool              `gorm:"not null"`
+	ExtraccionAguasNegras string            `gorm:"not null"`
+	MaterialTecho         string            `gorm:"not null"`
+	MaterialParades       string            `gorm:"not null"`
+	MaterialPiso          string            `gorm:"not null"`
+	NoHabitaciones        int               `gorm:"not null"`
+	OloresDesagradables   bool              `gorm:"not null"`
+	DescripcionOlores     string            `gorm:"not null"`
+	ZonaID                uint              `gorm:"not null"`
+	Zona                  Zona              `gorm:"foreignKey:ViviendaID"`
+	Habitantes            []Habitantes      `gorm:"foreignKey:ViviendaID" json:"-"`
+	AguaPotableID         uint              `gorm:"not null"`
+	AguaPotable           AguaPotable       `gorm:"foreignKey:AguaPotableID"`
+	ProblemasSalud        []ProblemasSalud  `gorm:"foreignKey:ViviendaID" json:"-"`
+	Fallecimientos        []Fallecimientos  `gorm:"foreignKey:ViviendaID" json:"-"`
+	Cancer                []Cancer          `gorm:"foreignKey:ViviendaID" json:"-"`
+	Embarazo              []Embarazo        `gorm:"foreignKey:ViviendaID" json:"-"`
+	PerdidaEmbarazo       []PerdidaEmbarazo `gorm:"foreignKey:ViviendaID" json:"-"`
+	Parto                 []Parto           `gorm:"foreignKey:ViviendaID" json:"-"`
+	Discapacidad          []Discapacidad    `gorm:"foreignKey:ViviendaID" json:"-"`
+	Tratamiento           []Tratamiento     `gorm:"foreignKey:ViviendaID" json:"-"`
+	Farmacos              []Farmacos        `gorm:"foreignKey:ViviendaID" json:"-"`
+	CiudadID              uint              `gorm:"not null"`
+	Ciudad                Ciudad            `gorm:"foreignKey:CiudadID" json:"-"`
+	DonadorSangre         []DonadorSangre   `gorm:"foreignKey:ViviendaID" json:"-"`
+}
+
+type Habitantes struct {
+	gorm.Model
+	EncuestadorID    uint
+	Encuestado       bool        `gorm:"not null"`
+	ViviendaID       uint        `gorm:"not null"`
+	Sexo             string      `gorm:"not null"`
+	Edad             int         `gorm:"not null"`
+	Fumador          bool        `gorm:"not null"`
+	TiempoResidencia int         `gorm:"not null"`
+	EscolaridadId    uint        `gorm:"not null"`
+	OcupacionId      uint        `gorm:"not null"`
+	Escolaridad      Escolaridad `gorm:"foreignKey:ID"`
+	Ocupacion        Ocupacion   `gorm:"foreignKey:ID"`
 }

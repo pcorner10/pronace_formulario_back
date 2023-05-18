@@ -8,13 +8,13 @@ import (
 
 func Migrate(db *gorm.DB) {
 	err := db.AutoMigrate(
-		&entity.Habitantes{}, &entity.Escolaridad{}, &entity.Ocupacion{},
-		&entity.User{}, &entity.Vivienda{}, &entity.Zona{},
-		&entity.AguaPotable{}, &entity.ProblemasSalud{}, &entity.Fallecimientos{},
-		&entity.Cancer{}, &entity.Embarazo{}, &entity.PerdidaEmbarazo{},
-		&entity.Parto{}, &entity.Discapacidad{}, &entity.Tratamiento{},
-		&entity.Farmacos{}, &entity.Ciudad{}, &entity.DonadorSangre{},
-		&entity.RegistrosViviendas{},
+		&entity.User{}, &entity.Vivienda{}, &entity.AguaPotable{},
+		&entity.Fallecimientos{}, &entity.Cancer{}, &entity.Embarazo{},
+		&entity.PerdidaEmbarazo{}, &entity.Parto{}, &entity.Discapacidad{},
+		&entity.Tratamiento{}, &entity.Farmacos{}, &entity.Ciudad{},
+		&entity.DonadorSangre{}, &entity.RegistrosViviendas{}, &entity.Zona{},
+		&entity.ProblemasSalud{}, &entity.Habitantes{}, &entity.Escolaridad{},
+		&entity.Ocupacion{},
 	)
 
 	if err != nil {
