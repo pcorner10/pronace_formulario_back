@@ -1,18 +1,20 @@
 package main
 
 import (
-	"pronaces_back/config"
-	"pronaces_back/db"
+	"log"
+	"pronaces_back/api"
 
 	"github.com/spf13/viper"
 )
 
 func main() {
-	config.Init()
-	dbHandler := db.Init()
 
-	if viper.GetBool("database.migrate") {
-		dbHandler = dbHandler.Debug()
+	log.Println("Starting server...")
+	port := viper.GetString("server.port")
+
+	if port == "" {
+		log.Fatal("Port is not set")
 	}
 
+	api.Start(port)
 }

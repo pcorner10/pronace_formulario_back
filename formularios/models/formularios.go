@@ -1,4 +1,4 @@
-package entity
+package models
 
 import (
 	"time"
@@ -6,10 +6,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type Encuestador struct {
+type User struct {
 	gorm.Model
 	UserName string `gorm:"uniqueIndex;not null"`
 	Password string `gorm:"not null"`
+	Role     string `gorm:"not null"`
 	Email    string `gorm:"uniqueIndex;not null"`
 }
 

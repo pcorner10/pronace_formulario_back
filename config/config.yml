@@ -10,3 +10,6 @@ database:
   password: "root"
   migrate: true
   seed: true
+
+token:
+  access_token: "pronaces@2023_token"
