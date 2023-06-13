@@ -20,6 +20,13 @@ func SetupRoutes(router *gin.Engine, dbHandler *gorm.DB) {
 	// Crear un nuevo manejador de autenticación utilizando el caso de uso de autenticación.
 	authHandler := handler.NewAuthHandler(authUseCase)
 
+	formRepo := orm.NewFormRepository(dbHandler)
+
+	formUseCase := usecase.NewFormUseCase(formRepo)
+
+	// Crear un nuevo manejador para los formularios
+	formHandler := handler.NewFormHandler(formUseCase)
+
 	public := router.Group("/public")
 	{
 		public.POST("/login", authHandler.Login)
@@ -28,7 +35,9 @@ func SetupRoutes(router *gin.Engine, dbHandler *gorm.DB) {
 
 	private := router.Group("/api")
 	private.Use(JWTMiddleware())
+
+	forms := private.Group("/forms")
 	{
-		private.POST("/login", nil)
+		forms.POST("/form0", formHandler.CreateForm)
 	}
 }

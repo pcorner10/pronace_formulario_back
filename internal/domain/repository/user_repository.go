@@ -11,6 +11,3 @@ type UserRepository interface {
 	Update(user *entity.User) error
 	Delete(userID uint64) error
 }
-
-type userRepository struct {
-}
