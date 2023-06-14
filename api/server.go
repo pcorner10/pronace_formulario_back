@@ -10,7 +10,7 @@ func JWTMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		// Leer token de la cabecera de la petición
-		token := ctx.GetHeader("Authorization")
+		token := ctx.GetHeader("token")
 		if token == "" {
 			ctx.JSON(400, gin.H{"error": "missing Authorization header"})
 			ctx.Abort()

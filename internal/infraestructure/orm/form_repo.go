@@ -17,7 +17,7 @@ func NewFormRepository(db *gorm.DB) repository.FormRepository {
 	}
 }
 
-func (r *formRepository) CreateForm(table0 entity.Table0) (*entity.Table0, error) {
+func (r *formRepository) CreateForm0(table0 entity.Table0) (*entity.Table0, error) {
 
 	err := r.db.Create(&table0).Error
 	if err != nil {
@@ -25,4 +25,174 @@ func (r *formRepository) CreateForm(table0 entity.Table0) (*entity.Table0, error
 	}
 
 	return &table0, nil
+}
+
+func (r *formRepository) CreateForm1(table1 entity.Table1) (*entity.Table1, error) {
+	
+	err := r.db.Create(&table1).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table1, nil
+}
+
+func (r *formRepository) CreateForm2(table2 entity.Table2) (*entity.Table2, error) {
+	
+	err := r.db.Create(&table2).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table2, nil
+}
+
+func (r *formRepository) CreateForm3(table3 entity.Table3) (*entity.Table3, error) {
+
+	err := r.db.Create(&table3).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table3, nil
+}
+
+func (r *formRepository) CreateForm4(table4 entity.Table4) (*entity.Table4, error) {
+
+	err := r.db.Create(&table4).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table4, nil
+}
+
+func (r *formRepository) CreateForm5(table5 entity.Table5) (*entity.Table5, error) {
+
+	err := r.db.Create(&table5).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table5, nil
+}
+
+func (r *formRepository) CreateForm6(table6 entity.Table6) (*entity.Table6, error) {
+	
+	err := r.db.Create(&table6).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table6, nil
+}
+
+func (r *formRepository) CreateForm7(table7 entity.Table7) (*entity.Table7, error) {
+	
+	err := r.db.Create(&table7).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table7, nil
+}
+
+func (r *formRepository) CreateForm8(table8 entity.Table8) (*entity.Table8, error) {
+	
+	err := r.db.Create(&table8).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table8, nil
+}
+
+func (r *formRepository) CreateForm8_1(table8_1 entity.Table8_1) (*entity.Table8_1, error) {
+	
+	err := r.db.Create(&table8_1).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table8_1, nil
+}
+
+func (r *formRepository) CreateForm9(table9 entity.Table9) (*entity.Table9, error) {
+	
+	err := r.db.Create(&table9).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table9, nil
+}
+
+func (r *formRepository) CreateForm9_1(table9_1 entity.Table9_1) (*entity.Table9_1, error) {
+	
+	err := r.db.Create(&table9_1).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table9_1, nil
+}
+
+func (r *formRepository) CreateForm10(table10 entity.Table10) (*entity.Table10, error) {
+	
+	err := r.db.Create(&table10).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table10, nil
+}
+
+func (r *formRepository) CreateForm10_1(table10_1 entity.Table10_1) (*entity.Table10_1, error) {
+	
+	err := r.db.Create(&table10_1).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table10_1, nil
+}
+
+func (r *formRepository) CreateForm11(table11 entity.Table11) (*entity.Table11, error) {
+	
+	err := r.db.Create(&table11).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table11, nil
+}
+
+func (r *formRepository) CreateForm12(table12 entity.Table12) (*entity.Table12, error) {
+
+	err := r.db.Create(&table12).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table12, nil
+}
+
+func (r *formRepository) CreateForm13(table13 entity.Table13) (*entity.Table13, error) {
+	
+	err := r.db.Create(&table13).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table13, nil
+}
+
+func (r *formRepository) CreateForm14(table14 entity.Table14) (*entity.Table14, error) {
+
+	err := r.db.Create(&table14).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &table14, nil
 }
