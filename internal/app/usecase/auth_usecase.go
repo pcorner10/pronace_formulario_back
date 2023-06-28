@@ -17,25 +17,39 @@ func NewAuthUseCase(userRepository repository.UserRepository) *AuthUseCase {
 	}
 }
 
-func (u *AuthUseCase) Login(email, password string) (string, error) {
+type ReponseLogin struct {
+	Token    string `json:"token"`
+	UserName string `json:"user_name"`
+	Role     string `json:"role"`
+	Id       uint    `json:"id"`
+}
+
+func (u *AuthUseCase) Login(email, password string) (*ReponseLogin, error) {
 	// Buscar usuario por nombre de usuario
 	user, err := u.userRepository.GetByEmail(email)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	// Verificar contraseña
 	if !service.ComparePasswords(user.Password, password) {
-		return "", errors.New("invalid password")
+		return nil, errors.New("invalid password")
 	}
 
 	// Generar token de autenticación
 	token, err := service.GenerateToken(email, user.Role)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return token, nil
+	ReponseLogin := ReponseLogin{
+		Token:    token,
+		UserName: user.UserName,
+		Role:     user.Role,
+		Id:       user.ID,
+	}
+
+	return &ReponseLogin, nil
 }
 
 func (u *AuthUseCase) Register(user *entity.User) error {

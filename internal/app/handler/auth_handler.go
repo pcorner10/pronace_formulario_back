@@ -30,14 +30,14 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 	}
 
 	// Autenticar usuario
-	token, err := h.AuthUseCase.Login(credentials.Email, credentials.Password)
+	res, err := h.AuthUseCase.Login(credentials.Email, credentials.Password)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "authentication failed"})
 		return
 	}
 
 	// Devolver token de autenticación
-	ctx.JSON(http.StatusOK, gin.H{"token": token})
+	ctx.JSON(http.StatusOK, gin.H{"res": res})
 }
 
 func (h *AuthHandler) Register(ctx *gin.Context) {
