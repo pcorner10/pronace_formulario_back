@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	apprepository "pronaces_back/internal/app/repository"
 	"pronaces_back/internal/domain/entity"
 	"pronaces_back/internal/domain/repository"
 )
@@ -15,15 +16,17 @@ func NewFormUseCase(formRepository repository.FormRepository) *FormUseCase {
 	}
 }
 
-func (u *FormUseCase) CreateForm0(form entity.Table0) (*entity.Table0, error) {
+func (u *FormUseCase) CreateForm0(integrantes apprepository.Form0Request) error {
 
-	res := &entity.Table0{}
-	res, err := u.formRepository.CreateForm0(form)
+	form := make([]entity.Table0, len(integrantes.Integrante))
+	copy(form, integrantes.Integrante)
+
+	err := u.formRepository.CreateForm0(form)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return res, nil
+	return nil
 }
 
 func (u *FormUseCase) CreateForm1(form entity.Table1) (*entity.Table1, error) {
@@ -115,7 +118,7 @@ func (u *FormUseCase) CreateForm8(form entity.Table8) (*entity.Table8, error) {
 }
 
 func (u *FormUseCase) CreateForm8_1(form entity.Table8_1) (*entity.Table8_1, error) {
-	
+
 	res := &entity.Table8_1{}
 	res, err := u.formRepository.CreateForm8_1(form)
 	if err != nil {
@@ -126,7 +129,7 @@ func (u *FormUseCase) CreateForm8_1(form entity.Table8_1) (*entity.Table8_1, err
 }
 
 func (u *FormUseCase) CreateForm9(table9 entity.Table9) (*entity.Table9, error) {
-	
+
 	res := &entity.Table9{}
 	res, err := u.formRepository.CreateForm9(table9)
 	if err != nil {
@@ -136,8 +139,8 @@ func (u *FormUseCase) CreateForm9(table9 entity.Table9) (*entity.Table9, error) 
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm9_1(table9_1 entity.Table9_1) (*entity.Table9_1, error){
-	
+func (u *FormUseCase) CreateForm9_1(table9_1 entity.Table9_1) (*entity.Table9_1, error) {
+
 	res := &entity.Table9_1{}
 	res, err := u.formRepository.CreateForm9_1(table9_1)
 	if err != nil {
@@ -147,8 +150,8 @@ func (u *FormUseCase) CreateForm9_1(table9_1 entity.Table9_1) (*entity.Table9_1,
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm10(table10 entity.Table10) (*entity.Table10, error){
-	
+func (u *FormUseCase) CreateForm10(table10 entity.Table10) (*entity.Table10, error) {
+
 	res := &entity.Table10{}
 	res, err := u.formRepository.CreateForm10(table10)
 	if err != nil {
@@ -158,8 +161,8 @@ func (u *FormUseCase) CreateForm10(table10 entity.Table10) (*entity.Table10, err
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm10_1(table10_1 entity.Table10_1) (*entity.Table10_1, error){
-	
+func (u *FormUseCase) CreateForm10_1(table10_1 entity.Table10_1) (*entity.Table10_1, error) {
+
 	res := &entity.Table10_1{}
 	res, err := u.formRepository.CreateForm10_1(table10_1)
 	if err != nil {
@@ -169,8 +172,8 @@ func (u *FormUseCase) CreateForm10_1(table10_1 entity.Table10_1) (*entity.Table1
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm11(table11 entity.Table11) (*entity.Table11, error){
-	
+func (u *FormUseCase) CreateForm11(table11 entity.Table11) (*entity.Table11, error) {
+
 	res := &entity.Table11{}
 	res, err := u.formRepository.CreateForm11(table11)
 	if err != nil {
@@ -180,8 +183,8 @@ func (u *FormUseCase) CreateForm11(table11 entity.Table11) (*entity.Table11, err
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm12(table12 entity.Table12) (*entity.Table12, error){
-	
+func (u *FormUseCase) CreateForm12(table12 entity.Table12) (*entity.Table12, error) {
+
 	res := &entity.Table12{}
 	res, err := u.formRepository.CreateForm12(table12)
 	if err != nil {
@@ -191,8 +194,8 @@ func (u *FormUseCase) CreateForm12(table12 entity.Table12) (*entity.Table12, err
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm13(table13 entity.Table13) (*entity.Table13, error){
-	
+func (u *FormUseCase) CreateForm13(table13 entity.Table13) (*entity.Table13, error) {
+
 	res := &entity.Table13{}
 	res, err := u.formRepository.CreateForm13(table13)
 	if err != nil {
@@ -202,8 +205,8 @@ func (u *FormUseCase) CreateForm13(table13 entity.Table13) (*entity.Table13, err
 	return res, nil
 }
 
-func (u *FormUseCase) CreateForm14(table14 entity.Table14) (*entity.Table14, error){
-	
+func (u *FormUseCase) CreateForm14(table14 entity.Table14) (*entity.Table14, error) {
+
 	res := &entity.Table14{}
 	res, err := u.formRepository.CreateForm14(table14)
 	if err != nil {

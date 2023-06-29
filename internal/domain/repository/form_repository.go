@@ -4,7 +4,7 @@ import "pronaces_back/internal/domain/entity"
 
 // FormRepository define las operaciones para acceder y manipular los datos de los formularios
 type FormRepository interface {
-	CreateForm0(table0 entity.Table0) (*entity.Table0, error)
+	CreateForm0(table0 []entity.Table0) error
 	CreateForm1(table1 entity.Table1) (*entity.Table1, error)
 	CreateForm2(table2 entity.Table2) (*entity.Table2, error)
 	CreateForm3(table3 entity.Table3) (*entity.Table3, error)

@@ -6,187 +6,187 @@ import (
 
 type Zona struct {
 	gorm.Model
-	Municipio string `json:"municipio" gorm:"not null"`
-	Localidad string `json:"localidad" gorm:"not null"`
-	Colonia   string `json:"colonia" gorm:"not null"`
-	Manzana   string `json:"manzana" gorm:"not null"`
-	Lote      string `json:"lote" gorm:"not null"`
+	Municipio string `json:"municipio"`
+	Localidad string `json:"localidad"`
+	Colonia   string `json:"colonia"`
+	Manzana   string `json:"manzana"`
+	Lote      string `json:"lote"`
 }
 
 type Table0 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	Sexo          string `json:"sexo" gorm:"not null"`
-	Edad          int    `json:"edad" gorm:"not null"`
-	Parentesco    string `json:"parentesco" gorm:"not null"`
-	Escolaridad   string `json:"escolaridad" gorm:"not null"`
-	Trabaja       string `json:"trabaja" gorm:"not null"`
-	HorasPorDia   int    `json:"horas_dia" gorm:"not null"`
-	DiasPorSemana int    `json:"dias_semana" gorm:"not null"`
-	Ocupacion     string `json:"ocupacion" gorm:"not null"`
-	Fumador       string `json:"fumador" gorm:"not null"`
-	TiempoCiudad  int    `json:"tiempo_ciudad" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID           uint   `json:"zona_id"`
+	Sexo             string `json:"sexo"`
+	Edad             int    `json:"edad"`
+	Parentesco       string `json:"parentesco"`
+	Escolaridad      string `json:"escolaridad"`
+	Trabaja          string `json:"trabaja"`
+	HorasPorDia      int    `json:"horas_dia"`
+	DiasPorSemana    int    `json:"dias_semana"`
+	Ocupacion        string `json:"ocupacion"`
+	Fumador          string `json:"fumador"`
+	TiempoCiudad     int    `json:"tiempo_ciudad"`
 }
 
 type Table1 struct {
 	gorm.Model
-	EncuestadorID       uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID              uint   `json:"zona_id" gorm:"not null"`
-	TieneElectricidad   string `json:"tiene_electricidad" gorm:"not null"`
-	FuentesAgua         string `json:"fuentes_agua" gorm:"not null"`
-	TieneGas            string `json:"tiene_gas" gorm:"not null"`
-	EliminacionDesechos string `json:"eliminacion_desechos" gorm:"not null"`
-	MaterialTecho       string `json:"material_techo" gorm:"not null"`
-	MaterialPiso        string `json:"material_piso" gorm:"not null"`
-	MaterialParedes     string `json:"material_paredes" gorm:"not null"`
-	NumCuartos          int    `json:"num_cuartos" gorm:"not null"`
-	OloresDesagradables string `json:"olores_desagradables" gorm:"not null"`
+	EncuestadorEmail    string `json:"encuestador_email"`
+	ZonaID              uint   `json:"zona_id"`
+	TieneElectricidad   string `json:"tiene_electricidad"`
+	FuentesAgua         string `json:"fuentes_agua"`
+	TieneGas            string `json:"tiene_gas"`
+	EliminacionDesechos string `json:"eliminacion_desechos"`
+	MaterialTecho       string `json:"material_techo"`
+	MaterialPiso        string `json:"material_piso"`
+	MaterialParedes     string `json:"material_paredes"`
+	NumCuartos          int    `json:"num_cuartos"`
+	OloresDesagradables string `json:"olores_desagradables"`
 }
 
 type Table2 struct {
 	gorm.Model
-	EncuestadorID    uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID           uint   `json:"zona_id" gorm:"not null"`
-	LlaveInterior    string `json:"llave_interior" gorm:"not null"`
-	Garrafon         string `json:"garrafon" gorm:"not null"`
-	LlaveComunitaria string `json:"llave_comunitaria" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID           uint   `json:"zona_id"`
+	LlaveInterior    string `json:"llave_interior"`
+	Garrafon         string `json:"garrafon"`
+	LlaveComunitaria string `json:"llave_comunitaria"`
 }
 
 type Table3 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	Imss          string `json:"imss" gorm:"not null"`
-	Issste        string `json:"issste" gorm:"not null"`
-	Particular    string `json:"particular" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID        uint   `json:"zona_id"`
+	Imss          string `json:"imss"`
+	Issste        string `json:"issste"`
+	Particular    string `json:"particular"`
 }
 
 type Table4 struct {
 	gorm.Model
-	EncuestadorID      uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID             uint   `json:"zona_id" gorm:"not null"`
-	EnfermedadReferida string `json:"enfermedad_referida" gorm:"not null"`
-	EnfermedadRecabada string `json:"enfermedad_recabada" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID             uint   `json:"zona_id"`
+	EnfermedadReferida string `json:"enfermedad_referida"`
+	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
 
 type Table5 struct {
 	gorm.Model
-	EncuestadorID      uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID             uint   `json:"zona_id" gorm:"not null"`
-	EnfermedadReferida string `json:"enfermedad_referida" gorm:"not null"`
-	EnfermedadRecabada string `json:"enfermedad_recabada" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID             uint   `json:"zona_id"`
+	EnfermedadReferida string `json:"enfermedad_referida"`
+	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
 
 type Table6 struct {
 	gorm.Model
-	EncuestadorID     uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID            uint   `json:"zona_id" gorm:"not null"`
-	Sexo              string `json:"sexo" gorm:"not null"`
-	EdadFallecimiento int    `json:"edad_fallecimiento" gorm:"not null"`
-	AñoFallecimiento  int    `json:"año_fallecimiento" gorm:"not null"`
-	CausaReferida     string `json:"causa_referida" gorm:"not null"`
-	CausaRecabada     string `json:"causa_recabada" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID            uint   `json:"zona_id"`
+	Sexo              string `json:"sexo"`
+	EdadFallecimiento int    `json:"edad_fallecimiento"`
+	AñoFallecimiento  int    `json:"año_fallecimiento"`
+	CausaReferida     string `json:"causa_referida"`
+	CausaRecabada     string `json:"causa_recabada"`
 }
 
 type Table7 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	Sexo          string `json:"sexo" gorm:"not null"`
-	EdadDetection int    `json:"edad_detection" gorm:"not null"`
-	AñoDetection  int    `json:"año_detection" gorm:"not null"`
-	TipoReferido  string `json:"tipo_referido" gorm:"not null"`
-	TipoRecabado  string `json:"tipo_recabado" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID        uint   `json:"zona_id"`
+	Sexo          string `json:"sexo"`
+	EdadDetection int    `json:"edad_detection"`
+	AñoDetection  int    `json:"año_detection"`
+	TipoReferido  string `json:"tipo_referido"`
+	TipoRecabado  string `json:"tipo_recabado"`
 }
 
 type Table8 struct {
 	gorm.Model
-	EncuestadorID        uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID               uint   `json:"zona_id" gorm:"not null"`
-	AñoNacimientoPerdida int    `json:"año_nacimiento_perdida" gorm:"not null"`
-	EnCurso              string `json:"en_curso" gorm:"not null"`
-	TipoParto            string `json:"tipo_parto" gorm:"not null"`
-	TuvoComplicaciones   string `json:"tuvo_complicaciones" gorm:"not null"`
-	ComplicacionReferida string `json:"complicacion_referida" gorm:"not null"`
-	ComplicacionRecabada string `json:"complicacion_recabada" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID               uint   `json:"zona_id"`
+	AñoNacimientoPerdida int    `json:"año_nacimiento_perdida"`
+	EnCurso              string `json:"en_curso"`
+	TipoParto            string `json:"tipo_parto"`
+	TuvoComplicaciones   string `json:"tuvo_complicaciones"`
+	ComplicacionReferida string `json:"complicacion_referida"`
+	ComplicacionRecabada string `json:"complicacion_recabada"`
 }
 
 type Table8_1 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	AñoPerdida    int    `json:"año_perdida" gorm:"not null"`
-	Trimestre     string `json:"trimestre" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID        uint   `json:"zona_id"`
+	AñoPerdida    int    `json:"año_perdida"`
+	Trimestre     string `json:"trimestre"`
 }
 
 type Table9 struct {
 	gorm.Model
-	EncuestadorID        uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID               uint   `json:"zona_id" gorm:"not null"`
-	BajoPeso             string `json:"bajo_peso" gorm:"not null"`
-	Prematuro            string `json:"prematuro" gorm:"not null"`
-	Malformacion         string `json:"malformacion" gorm:"not null"`
-	MalformacionReferida string `json:"malformacion_referida" gorm:"not null"`
-	MalformacionRecabada string `json:"malformacion_recabada" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID               uint   `json:"zona_id"`
+	BajoPeso             string `json:"bajo_peso"`
+	Prematuro            string `json:"prematuro"`
+	Malformacion         string `json:"malformacion"`
+	MalformacionReferida string `json:"malformacion_referida"`
+	MalformacionRecabada string `json:"malformacion_recabada"`
 }
 
 type Table9_1 struct {
 	gorm.Model
-	EncuestadorID    uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID           uint   `json:"zona_id" gorm:"not null"`
-	Año              int    `json:"año" gorm:"not null"`
-	ProblemaReferido string `json:"problema_referido" gorm:"not null"`
-	ProblemaRecabado string `json:"problema_recabado" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID           uint   `json:"zona_id"`
+	Año              int    `json:"año"`
+	ProblemaReferido string `json:"problema_referido"`
+	ProblemaRecabado string `json:"problema_recabado"`
 }
 
 type Table10 struct {
 	gorm.Model
-	EncuestadorID        uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID               uint   `json:"zona_id" gorm:"not null"`
-	DiscapacidadReferida string `json:"discapacidad_referida" gorm:"not null"`
-	DiscapacidadRecabada string `json:"discapacidad_recabada" gorm:"not null"`
-	TipoCondicion        string `json:"tipo_condicion" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID               uint   `json:"zona_id"`
+	DiscapacidadReferida string `json:"discapacidad_referida"`
+	DiscapacidadRecabada string `json:"discapacidad_recabada"`
+	TipoCondicion        string `json:"tipo_condicion"`
 }
 
 type Table10_1 struct {
 	gorm.Model
-	EncuestadorID    uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID           uint   `json:"zona_id" gorm:"not null"`
-	SiDonde          string `json:"si_donde" gorm:"not null"`
-	NoPorque         string `json:"no_porque" gorm:"not null"`
-	TieneCertificado string `json:"tiene_certificado" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID           uint   `json:"zona_id"`
+	SiDonde          string `json:"si_donde"`
+	NoPorque         string `json:"no_porque"`
+	TieneCertificado string `json:"tiene_certificado"`
 }
 
 type Table11 struct {
 	gorm.Model
-	EncuestadorID  uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID         uint   `json:"zona_id" gorm:"not null"`
-	NombreFarmaco  string `json:"nombre_farmaco" gorm:"not null"`
-	EsPrescrito    string `json:"es_prescrito" gorm:"not null"`
-	MotivoReferido string `json:"motivo_referido" gorm:"not null"`
-	MotivoRecabado string `json:"motivo_recabado" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID         uint   `json:"zona_id"`
+	NombreFarmaco  string `json:"nombre_farmaco"`
+	EsPrescrito    string `json:"es_prescrito"`
+	MotivoReferido string `json:"motivo_referido"`
+	MotivoRecabado string `json:"motivo_recabado"`
 }
 
 type Table12 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	HayProblema   string `json:"hay_problema" gorm:"not null"`
-	QueProblema   string `json:"que_problema" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID        uint   `json:"zona_id"`
+	HayProblema   string `json:"hay_problema"`
+	QueProblema   string `json:"que_problema"`
 }
 
 type Table13 struct {
 	gorm.Model
-	EncuestadorID    uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID           uint   `json:"zona_id" gorm:"not null"`
-	HayContaminacion string `json:"hay_contaminacion" gorm:"not null"`
-	CualEs           string `json:"cual_es" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID           uint   `json:"zona_id"`
+	HayContaminacion string `json:"hay_contaminacion"`
+	CualEs           string `json:"cual_es"`
 }
 
 type Table14 struct {
 	gorm.Model
-	EncuestadorID uint   `json:"encuestador_id" gorm:"not null"`
-	ZonaID        uint   `json:"zona_id" gorm:"not null"`
-	Tiempo        string `json:"tiempo" gorm:"not null"`
+	EncuestadorEmail string `json:"encuestador_email"`
+	ZonaID        uint   `json:"zona_id"`
+	Tiempo        string `json:"tiempo"`
 }

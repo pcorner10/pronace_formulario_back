@@ -2,6 +2,7 @@ package api
 
 import (
 	"pronaces_back/internal/domain/service"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,12 +11,22 @@ func JWTMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		// Leer token de la cabecera de la petición
-		token := ctx.GetHeader("token")
-		if token == "" {
+		authHeader := ctx.GetHeader("Authorization")
+		if authHeader == "" {
 			ctx.JSON(400, gin.H{"error": "missing Authorization header"})
 			ctx.Abort()
 			return
 		}
+
+		// Verificar el formato del token
+		authHeaderParts := strings.Split(authHeader, " ")
+		if len(authHeaderParts) != 2 || authHeaderParts[0] != "Bearer" {
+			ctx.JSON(400, gin.H{"error": "invalid Authorization header format"})
+			ctx.Abort()
+			return
+		}
+
+		token := authHeaderParts[1]
 
 		// Validar token
 		claims, err := service.ValidateJWT(token)

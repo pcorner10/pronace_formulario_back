@@ -13,8 +13,13 @@ func Start(port string, dbHandler *gorm.DB) {
 
 	r := gin.Default()
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
+	// Add CORS middleware
+	config := cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
+		AllowCredentials: true,
+	}
 
 	r.Use(cors.New(config))
 

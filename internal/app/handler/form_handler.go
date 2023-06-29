@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+	apprepository "pronaces_back/internal/app/repository"
 	usecase "pronaces_back/internal/app/usecase"
 	"pronaces_back/internal/domain/entity"
 
@@ -18,22 +20,24 @@ func NewFormHandler(formUseCase *usecase.FormUseCase) *FormHandler {
 }
 
 func (h *FormHandler) CreateForm0(ctx *gin.Context) {
-	res := &entity.Table0{}
+	res := &apprepository.Form0Request{}
 
 	err := ctx.BindJSON(res)
 	if err != nil {
+		fmt.Println(err)
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Perform a type assertion to convert the interface{} returned by CreateForm to a *entity.Table0
-	res, err = h.FormUseCase.CreateForm0(*res)
+	err = h.FormUseCase.CreateForm0(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	// return the response: "suvcessfully created"
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm1(ctx *gin.Context) {
