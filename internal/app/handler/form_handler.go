@@ -4,7 +4,6 @@ import (
 	"fmt"
 	apprepository "pronaces_back/internal/app/repository"
 	usecase "pronaces_back/internal/app/usecase"
-	"pronaces_back/internal/domain/entity"
 
 	"github.com/gin-gonic/gin"
 )
@@ -41,7 +40,7 @@ func (h *FormHandler) CreateForm0(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm1(ctx *gin.Context) {
-	res := &entity.Table1{}
+	res := &apprepository.Form1{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -49,17 +48,17 @@ func (h *FormHandler) CretateForm1(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm1(*res)
+	err = h.FormUseCase.CreateForm1(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm2(ctx *gin.Context) {
-	res := &entity.Table2{}
+	res := &apprepository.Form2{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -67,17 +66,17 @@ func (h *FormHandler) CretateForm2(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm2(*res)
+	err = h.FormUseCase.CreateForm2(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm3(ctx *gin.Context) {
-	res := &entity.Table3{}
+	res := &apprepository.Form3{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -85,17 +84,17 @@ func (h *FormHandler) CretateForm3(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm3(*res)
+	err = h.FormUseCase.CreateForm3(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm4(ctx *gin.Context) {
-	res := &entity.Table4{}
+	res := &apprepository.Form4Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -103,17 +102,17 @@ func (h *FormHandler) CretateForm4(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm4(*res)
+	err = h.FormUseCase.CreateForm4(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm5(ctx *gin.Context) {
-	res := &entity.Table5{}
+	res := &apprepository.Form5Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -121,17 +120,17 @@ func (h *FormHandler) CretateForm5(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm5(*res)
+	err = h.FormUseCase.CreateForm5(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm6(ctx *gin.Context) {
-	res := &entity.Table6{}
+	res := &apprepository.Form6Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -139,17 +138,17 @@ func (h *FormHandler) CretateForm6(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm6(*res)
+	err = h.FormUseCase.CreateForm6(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm7(ctx *gin.Context) {
-	res := &entity.Table7{}
+	res := &apprepository.Form7Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -157,17 +156,17 @@ func (h *FormHandler) CretateForm7(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm7(*res)
+	err = h.FormUseCase.CreateForm7(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm8(ctx *gin.Context) {
-	res := &entity.Table8{}
+	res := &apprepository.Form8Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -175,17 +174,17 @@ func (h *FormHandler) CretateForm8(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm8(*res)
+	err = h.FormUseCase.CreateForm8(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm8_1(ctx *gin.Context) {
-	res := &entity.Table8_1{}
+	res := &apprepository.Form8_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -193,17 +192,17 @@ func (h *FormHandler) CretateForm8_1(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm8_1(*res)
+	err = h.FormUseCase.CreateForm8_1(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm9(ctx *gin.Context) {
-	res := &entity.Table9{}
+	res := &apprepository.Form9Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -211,17 +210,17 @@ func (h *FormHandler) CretateForm9(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm9(*res)
+	err = h.FormUseCase.CreateForm9(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm9_1(ctx *gin.Context) {
-	res := &entity.Table9_1{}
+	res := &apprepository.Form9_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -229,17 +228,17 @@ func (h *FormHandler) CretateForm9_1(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm9_1(*res)
+	err = h.FormUseCase.CreateForm9_1(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm10(ctx *gin.Context) {
-	res := &entity.Table10{}
+	res := &apprepository.Form10Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -247,17 +246,17 @@ func (h *FormHandler) CretateForm10(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm10(*res)
+	err = h.FormUseCase.CreateForm10(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm10_1(ctx *gin.Context) {
-	res := &entity.Table10_1{}
+	res := &apprepository.Form10_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -265,17 +264,17 @@ func (h *FormHandler) CretateForm10_1(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm10_1(*res)
+	err = h.FormUseCase.CreateForm10_1(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm11(ctx *gin.Context) {
-	res := &entity.Table11{}
+	res := &apprepository.Form11Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -283,17 +282,17 @@ func (h *FormHandler) CretateForm11(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm11(*res)
+	err = h.FormUseCase.CreateForm11(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm12(ctx *gin.Context) {
-	res := &entity.Table12{}
+	res := &apprepository.Form12{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -301,17 +300,17 @@ func (h *FormHandler) CretateForm12(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm12(*res)
+	err = h.FormUseCase.CreateForm12(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm13(ctx *gin.Context) {
-	res := &entity.Table13{}
+	res := &apprepository.Form13{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -319,17 +318,17 @@ func (h *FormHandler) CretateForm13(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm13(*res)
+	err = h.FormUseCase.CreateForm13(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
 func (h *FormHandler) CretateForm14(ctx *gin.Context) {
-	res := &entity.Table14{}
+	res := &apprepository.Form14Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -337,11 +336,11 @@ func (h *FormHandler) CretateForm14(ctx *gin.Context) {
 		return
 	}
 
-	res, err = h.FormUseCase.CreateForm14(*res)
+	err = h.FormUseCase.CreateForm14(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	ctx.JSON(200, gin.H{"data": res})
+	ctx.JSON(200, gin.H{"status": "successfully created"})
 }

@@ -15,7 +15,7 @@ type Zona struct {
 
 type Table0 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	Encuestador   User   `gorm:"foreignKey:EncuestadorID"`
 	ZonaID        uint   `json:"zona_id"`
 	Zona          Zona   `gorm:"foreignKey:ZonaID"`
@@ -33,7 +33,7 @@ type Table0 struct {
 
 type Table1 struct {
 	gorm.Model
-	EncuestadorID       uint64 `json:"encuestador_id"`
+	EncuestadorID       uint `json:"encuestador_id"`
 	ZonaID              uint   `json:"zona_id"`
 	TieneElectricidad   string `json:"tiene_electricidad"`
 	FuentesAgua         string `json:"fuentes_agua"`
@@ -48,7 +48,7 @@ type Table1 struct {
 
 type Table2 struct {
 	gorm.Model
-	EncuestadorID    uint64 `json:"encuestador_id"`
+	EncuestadorID    uint `json:"encuestador_id"`
 	ZonaID           uint   `json:"zona_id"`
 	LlaveInterior    string `json:"llave_interior"`
 	Garrafon         string `json:"garrafon"`
@@ -57,7 +57,7 @@ type Table2 struct {
 
 type Table3 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	ZonaID        uint   `json:"zona_id"`
 	Imss          string `json:"imss"`
 	Issste        string `json:"issste"`
@@ -68,7 +68,7 @@ type Table3 struct {
 
 type Table4 struct {
 	gorm.Model
-	EncuestadorID      uint64 `json:"encuestador_id"`
+	EncuestadorID      uint `json:"encuestador_id"`
 	ZonaID             uint   `json:"zona_id"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
@@ -76,7 +76,7 @@ type Table4 struct {
 
 type Table5 struct {
 	gorm.Model
-	EncuestadorID      uint64 `json:"encuestador_id"`
+	EncuestadorID      uint `json:"encuestador_id"`
 	ZonaID             uint   `json:"zona_id"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
@@ -84,7 +84,7 @@ type Table5 struct {
 
 type Table6 struct {
 	gorm.Model
-	EncuestadorID     uint64 `json:"encuestador_id"`
+	EncuestadorID     uint `json:"encuestador_id"`
 	ZonaID            uint   `json:"zona_id"`
 	Sexo              string `json:"sexo"`
 	EdadFallecimiento int    `json:"edad_fallecimiento"`
@@ -95,7 +95,7 @@ type Table6 struct {
 
 type Table7 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	ZonaID        uint   `json:"zona_id"`
 	Sexo          string `json:"sexo"`
 	EdadDetection int    `json:"edad_detection"`
@@ -106,7 +106,7 @@ type Table7 struct {
 
 type Table8 struct {
 	gorm.Model
-	EncuestadorID        uint64 `json:"encuestador_id"`
+	EncuestadorID        uint `json:"encuestador_id"`
 	ZonaID               uint   `json:"zona_id"`
 	AñoNacimientoPerdida int    `json:"año_nacimiento_perdida"`
 	EnCurso              string `json:"en_curso"`
@@ -118,7 +118,7 @@ type Table8 struct {
 
 type Table8_1 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	ZonaID        uint   `json:"zona_id"`
 	AñoPerdida    int    `json:"año_perdida"`
 	Trimestre     string `json:"trimestre"`
@@ -126,7 +126,7 @@ type Table8_1 struct {
 
 type Table9 struct {
 	gorm.Model
-	EncuestadorID        uint64 `json:"encuestador_id"`
+	EncuestadorID        uint `json:"encuestador_id"`
 	ZonaID               uint   `json:"zona_id"`
 	BajoPeso             string `json:"bajo_peso"`
 	Prematuro            string `json:"prematuro"`
@@ -137,7 +137,7 @@ type Table9 struct {
 
 type Table9_1 struct {
 	gorm.Model
-	EncuestadorID    uint64 `json:"encuestador_id"`
+	EncuestadorID    uint `json:"encuestador_id"`
 	ZonaID           uint   `json:"zona_id"`
 	Año              int    `json:"año"`
 	ProblemaReferido string `json:"problema_referido"`
@@ -146,7 +146,7 @@ type Table9_1 struct {
 
 type Table10 struct {
 	gorm.Model
-	EncuestadorID        uint64 `json:"encuestador_id"`
+	EncuestadorID        uint `json:"encuestador_id"`
 	ZonaID               uint   `json:"zona_id"`
 	DiscapacidadReferida string `json:"discapacidad_referida"`
 	DiscapacidadRecabada string `json:"discapacidad_recabada"`
@@ -155,7 +155,7 @@ type Table10 struct {
 
 type Table10_1 struct {
 	gorm.Model
-	EncuestadorID    uint64 `json:"encuestador_id"`
+	EncuestadorID    uint `json:"encuestador_id"`
 	ZonaID           uint   `json:"zona_id"`
 	SiDonde          string `json:"si_donde"`
 	NoPorque         string `json:"no_porque"`
@@ -164,7 +164,7 @@ type Table10_1 struct {
 
 type Table11 struct {
 	gorm.Model
-	EncuestadorID  uint64 `json:"encuestador_id"`
+	EncuestadorID  uint `json:"encuestador_id"`
 	ZonaID         uint   `json:"zona_id"`
 	NombreFarmaco  string `json:"nombre_farmaco"`
 	EsPrescrito    string `json:"es_prescrito"`
@@ -174,7 +174,7 @@ type Table11 struct {
 
 type Table12 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	ZonaID        uint   `json:"zona_id"`
 	HayProblema   string `json:"hay_problema"`
 	QueProblema   string `json:"que_problema"`
@@ -182,7 +182,7 @@ type Table12 struct {
 
 type Table13 struct {
 	gorm.Model
-	EncuestadorID    uint64 `json:"encuestador_id"`
+	EncuestadorID    uint `json:"encuestador_id"`
 	ZonaID           uint   `json:"zona_id"`
 	HayContaminacion string `json:"hay_contaminacion"`
 	CualEs           string `json:"cual_es"`
@@ -190,7 +190,7 @@ type Table13 struct {
 
 type Table14 struct {
 	gorm.Model
-	EncuestadorID uint64 `json:"encuestador_id"`
+	EncuestadorID uint `json:"encuestador_id"`
 	ZonaID        uint   `json:"zona_id"`
 	Tiempo        string `json:"tiempo"`
 }
