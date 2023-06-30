@@ -44,7 +44,7 @@ func (u *AuthUseCase) Login(email, password string) (*ReponseLogin, error) {
 
 	ReponseLogin := ReponseLogin{
 		Token:    token,
-		UserName: user.UserName,
+		UserName: user.Email,
 		Role:     user.Role,
 		Id:       user.ID,
 	}
