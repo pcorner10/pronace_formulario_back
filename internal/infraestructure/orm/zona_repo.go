@@ -27,7 +27,7 @@ func (r *zonaRepository) CreateZona(zona *entity.Zona) error {
 	return nil
 }
 
-func (r *zonaRepository) GetZonaByID(zonaID uint64) (*entity.Zona, error) {
+func (r *zonaRepository) GetZonaByID(zonaID uint) (*entity.Zona, error) {
 	
 	var zona entity.Zona
 	err := r.db.Where("id = ?", zonaID).First(&zona).Error
@@ -38,9 +38,9 @@ func (r *zonaRepository) GetZonaByID(zonaID uint64) (*entity.Zona, error) {
 	return &zona, nil
 }
 
-func (r *zonaRepository) GetZonaID(zona entity.Zona) (uint64, error) {
+func (r *zonaRepository) GetZonaID(zona entity.Zona) (uint, error) {
 	
-	var zonaID uint64
+	var zonaID uint
 
 	query := `
 		municipio = ? AND 
@@ -63,3 +63,4 @@ func (r *zonaRepository) GetZonaID(zona entity.Zona) (uint64, error) {
 
 	return zonaID, nil
 }
+
