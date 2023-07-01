@@ -1,5 +1,8 @@
 # pronace_formulario_back
 Este repositorio contendrá el código necesario para ejecutar un servidor para el manejo de formularios.
+## Estructura basada en 
+[Golang Project Structuring](https://medium.com/sellerapp/golang-project-structuring-ben-johnson-way-2a11035f94bc)
+
 
 Explicación de los directorios y archivos:
 
