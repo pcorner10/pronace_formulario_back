@@ -67,5 +67,5 @@ func (u *AuthUseCase) Register(user *entity.User) error {
 
 	user.Password = Password
 
-	return u.userRepository.Create(user)
+	return u.userRepository.Create(*user)
 }

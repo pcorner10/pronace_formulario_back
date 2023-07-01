@@ -38,6 +38,7 @@ func Init() *gorm.DB {
 	sql.SetConnMaxIdleTime(30)
 	sql.SetConnMaxLifetime(60)
 
+	fmt.Println("Successfully connected to database!")
 	return dbHandler
 }
 

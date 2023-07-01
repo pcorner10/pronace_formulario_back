@@ -17,7 +17,7 @@ func NewUserRepository(db *gorm.DB) repository.UserRepository {
 	}
 }
 
-func (r *userRepository) Create(user *entity.User) error {
+func (r *userRepository) Create(user entity.User) error {
 	// implementar la lógica de crear un usuario con GORM
 	err := r.db.Create(user).Error
 	if err != nil {
@@ -39,7 +39,7 @@ func (r *userRepository) GetByEmail(email string) (*entity.User, error) {
 	return user, nil
 }
 
-func (r *userRepository) Update(user *entity.User) error {
+func (r *userRepository) Update(user entity.User) error {
 	// implementar la lógica de actualizar un usuario con GORM
 	err := r.db.Save(user).Error
 	if err != nil {

@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"fmt"
 	apprepository "pronaces_back/internal/app/repository"
 	"pronaces_back/internal/domain/entity"
 	"pronaces_back/internal/domain/repository"
@@ -13,9 +14,12 @@ type FormUseCase struct {
 	zonaRepo       repository.ZonaRepository
 }
 
-func NewFormUseCase(formRepository repository.FormRepository) *FormUseCase {
+func NewFormUseCase(formRepository repository.FormRepository, 
+	userRepo repository.UserRepository, zonaRepo repository.ZonaRepository) *FormUseCase {
 	return &FormUseCase{
 		formRepository: formRepository,
+		userRepo:       userRepo,
+		zonaRepo:       zonaRepo,
 	}
 }
 
@@ -23,7 +27,9 @@ func (u *FormUseCase) CreateForm0(integrantes apprepository.Form0Request) error 
 
 	form := []entity.Table0{}
 
+	fmt.Println("El código llegó a esta etapa")
 	encuestador, err := u.userRepo.GetByEmail(integrantes.EncuestadorEmail)
+	fmt.Println("El código no llegó a esta etapa")
 	if err != nil {
 		return err
 	}

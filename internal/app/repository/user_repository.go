@@ -2,6 +2,8 @@ package apprepository
 
 import "pronaces_back/internal/domain/entity"
 
+
+
 type Form0Request struct {
 	EncuestadorEmail string      `json:"encuestador_email"`
 	Zona             entity.Zona `json:"zona"`
