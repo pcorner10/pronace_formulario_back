@@ -10,11 +10,33 @@ import (
 func BindAuth(dbReq *gorm.DB) *ihttp.AuthHandler {
 	userDB, err := db.NewUserGorm(dbReq)
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
 	service := NewAuthService(userDB)
 	handler := ihttp.NewAuthHandler(service)
 
-	return handler, nil
+	return handler
+}
+
+func BindForm(dbReq *gorm.DB) *ihttp.FormHandler {
+	formDB, err := db.NewFormGorm(dbReq)
+	if err != nil {
+		return nil
+	}
+
+	userDB, err := db.NewUserGorm(dbReq)
+	if err != nil {
+		return nil
+	}
+
+	zonaDB, err := db.NewZonaGorm(dbReq)
+	if err != nil {
+		return nil
+	}
+
+	service := NewFormService(formDB, userDB, zonaDB)
+	handler := ihttp.NewFormHandler(service)
+
+	return handler
 }
