@@ -1,4 +1,4 @@
-package http
+package ihttp
 
 import "golang.org/x/crypto/bcrypt"
 

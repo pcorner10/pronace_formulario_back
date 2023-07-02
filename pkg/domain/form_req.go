@@ -1,10 +1,25 @@
 package domain
 
-type FormReqService interface {
-	
+type FormService interface {
+	CreateForm0(req Form0Request) error
+	CreateForm1(req Form1) error
+	CreateForm2(req Form2) error
+	CreateForm3(req Form3) error
+	CreateForm4(req Form4Request) error
+	CreateForm5(req Form5Request) error
+	CreateForm6(req Form6Request) error
+	CreateForm7(req Form7Request) error
+	CreateForm8(req Form8Request) error
+	CreateForm8_1(req Form8_1Request) error
+	CreateForm9(req Form9Request) error
+	CreateForm9_1(req Form9_1Request) error
+	CreateForm10(req Form10Request) error
+	CreateForm10_1(req Form10_1Request) error
+	CreateForm11(req Form11Request) error
+	CreateForm12(req Form12) error
+	CreateForm13(req Form13) error
+	CreateForm14(req Form14Request) error
 }
-
-
 type Form0Request struct {
 	EncuestadorEmail string  `json:"encuestador_email"`
 	Zona             Zona    `json:"zona"`

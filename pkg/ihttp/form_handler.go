@@ -1,4 +1,4 @@
-package http
+package ihttp
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func NewFormHandler(formService domain.FormService) *FormHandler {
 }
 
 func (h *FormHandler) CreateForm0(ctx *gin.Context) {
-	res := &[]domain.Table0{}
+	res := &domain.Form0Request{}
 
 	err := ctx.BindJSON(res)
 	if err != nil {
@@ -39,7 +39,7 @@ func (h *FormHandler) CreateForm0(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm1(ctx *gin.Context) {
-	res := &Form1{}
+	res := &domain.Form1{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -57,7 +57,7 @@ func (h *FormHandler) CretateForm1(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm2(ctx *gin.Context) {
-	res := &Form2{}
+	res := &domain.Form2{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -75,7 +75,7 @@ func (h *FormHandler) CretateForm2(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm3(ctx *gin.Context) {
-	res := &Form3{}
+	res := &domain.Form3{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -93,7 +93,7 @@ func (h *FormHandler) CretateForm3(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm4(ctx *gin.Context) {
-	res := &Form4Request{}
+	res := &domain.Form4Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -111,7 +111,7 @@ func (h *FormHandler) CretateForm4(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm5(ctx *gin.Context) {
-	res := &Form5Request{}
+	res := &domain.Form5Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -129,7 +129,7 @@ func (h *FormHandler) CretateForm5(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm6(ctx *gin.Context) {
-	res := &Form6Request{}
+	res := &domain.Form6Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -147,7 +147,7 @@ func (h *FormHandler) CretateForm6(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm7(ctx *gin.Context) {
-	res := &Form7Request{}
+	res := &domain.Form7Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -165,7 +165,7 @@ func (h *FormHandler) CretateForm7(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm8(ctx *gin.Context) {
-	res := &Form8Request{}
+	res := &domain.Form8Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -183,7 +183,7 @@ func (h *FormHandler) CretateForm8(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm8_1(ctx *gin.Context) {
-	res := &Form8_1Request{}
+	res := &domain.Form8_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -201,7 +201,7 @@ func (h *FormHandler) CretateForm8_1(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm9(ctx *gin.Context) {
-	res := &Form9Request{}
+	res := &domain.Form9Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -219,7 +219,7 @@ func (h *FormHandler) CretateForm9(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm9_1(ctx *gin.Context) {
-	res := &Form9_1Request{}
+	res := &domain.Form9_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -237,7 +237,7 @@ func (h *FormHandler) CretateForm9_1(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm10(ctx *gin.Context) {
-	res := &Form10Request{}
+	res := &domain.Form10Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -255,7 +255,7 @@ func (h *FormHandler) CretateForm10(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm10_1(ctx *gin.Context) {
-	res := &Form10_1Request{}
+	res := &domain.Form10_1Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -273,7 +273,7 @@ func (h *FormHandler) CretateForm10_1(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm11(ctx *gin.Context) {
-	res := &Form11Request{}
+	res := &domain.Form11Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -291,7 +291,7 @@ func (h *FormHandler) CretateForm11(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm12(ctx *gin.Context) {
-	res := &Form12{}
+	res := &domain.Form12{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -309,7 +309,7 @@ func (h *FormHandler) CretateForm12(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm13(ctx *gin.Context) {
-	res := &Form13{}
+	res := &domain.Form13{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -327,7 +327,7 @@ func (h *FormHandler) CretateForm13(ctx *gin.Context) {
 }
 
 func (h *FormHandler) CretateForm14(ctx *gin.Context) {
-	res := &Form14Request{}
+	res := &domain.Form14Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {

@@ -10,9 +10,9 @@ type formGorm struct {
 	db *gorm.DB
 }
 
-func NewFormGorm() (domain.FormDB, error) {
+func NewFormGorm(db *gorm.DB) (domain.FormDB, error) {
 	return &formGorm{
-		db: GetDB(),
+		db: db,
 	}, nil
 }
 

@@ -2,7 +2,6 @@ package app
 
 import (
 	"pronaces_back/pkg/domain"
-	"pronaces_back/pkg/http"
 	"strconv"
 )
 
@@ -12,7 +11,6 @@ type formService struct {
 	DBZona domain.ZonaDB
 }
 
-
 func NewFormService(dbForm domain.FormDB, dbUser domain.UserDB, dbZona domain.ZonaDB) domain.FormService {
 	return &formService{
 		DBForm: dbForm,
@@ -21,27 +19,22 @@ func NewFormService(dbForm domain.FormDB, dbUser domain.UserDB, dbZona domain.Zo
 	}
 }
 
-func (u *formService) CreateForm0(integrantes interface{}) error {
+func (u *formService) CreateForm0(req domain.Form0Request) error {
 
 	form := []domain.Table0{}
 
-	integrantesTyped, ok := integrantes.(domain.Integrantes)
-	if !ok {
-		return fmt.Errorf("integrantes is not of type http.Integrantes")
-	}
-
-	encuestador, err := u.DBUser.GetByEmail(integrantesTyped.EncuestadorEmail)
+	encuestador, err := u.DBUser.GetByEmail(req.EncuestadorEmail)
 
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(integrantesTyped.Zona)
+	zona, err := u.DBZona.GetZonaID(req.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range integrantesTyped.Integrante {
+	for _, integrante := range req.Integrante {
 
 		edad, err := strconv.Atoi(integrante.Edad)
 		if err != nil {
@@ -76,7 +69,7 @@ func (u *formService) CreateForm0(integrantes interface{}) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm0(form)
+	err = u.DBForm.CreateForm0(form)
 	if err != nil {
 		return err
 	}
@@ -84,9 +77,9 @@ func (u *formService) CreateForm0(integrantes interface{}) error {
 	return nil
 }
 
-func (u *formService) CreateForm1(form apprepository.Form1) error {
+func (u *formService) CreateForm1(form domain.Form1) error {
 
-	res := entity.Table1{}
+	res := domain.Table1{}
 
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
@@ -115,7 +108,7 @@ func (u *formService) CreateForm1(form apprepository.Form1) error {
 	res.NumCuartos = NumCuartos
 	res.OloresDesagradables = form.OloresDesagradables
 
-	err = u.formRepository.CreateForm1(res)
+	err = u.DBForm.CreateForm1(res)
 	if err != nil {
 		return err
 	}
@@ -123,9 +116,9 @@ func (u *formService) CreateForm1(form apprepository.Form1) error {
 	return nil
 }
 
-func (u *formService) CreateForm2(form apprepository.Form2) error {
+func (u *formService) CreateForm2(form domain.Form2) error {
 
-	res := entity.Table2{}
+	res := domain.Table2{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -142,7 +135,7 @@ func (u *formService) CreateForm2(form apprepository.Form2) error {
 	res.Garrafon = form.Garrafon
 	res.LlaveComunitaria = form.LlaveComunitaria
 
-	err = u.formRepository.CreateForm2(res)
+	err = u.DBForm.CreateForm2(res)
 	if err != nil {
 		return err
 	}
@@ -150,9 +143,9 @@ func (u *formService) CreateForm2(form apprepository.Form2) error {
 	return nil
 }
 
-func (u *formService) CreateForm3(form apprepository.Form3) error {
+func (u *formService) CreateForm3(form domain.Form3) error {
 
-	res := entity.Table3{}
+	res := domain.Table3{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -171,7 +164,7 @@ func (u *formService) CreateForm3(form apprepository.Form3) error {
 	res.Privado = form.Privado
 	res.Ninguno = form.Ninguno
 
-	err = u.formRepository.CreateForm3(res)
+	err = u.DBForm.CreateForm3(res)
 	if err != nil {
 		return err
 	}
@@ -179,9 +172,9 @@ func (u *formService) CreateForm3(form apprepository.Form3) error {
 	return nil
 }
 
-func (u *formService) CreateForm4(form apprepository.Form4Request) error {
+func (u *formService) CreateForm4(form domain.Form4Request) error {
 
-	res := []entity.Table4{}
+	res := []domain.Table4{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -193,7 +186,7 @@ func (u *formService) CreateForm4(form apprepository.Form4Request) error {
 	}
 
 	for _, integrante := range form.Integrante {
-		res = append(res, entity.Table4{
+		res = append(res, domain.Table4{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona,
 			EnfermedadReferida: integrante.EnfermedadReferida,
@@ -201,7 +194,7 @@ func (u *formService) CreateForm4(form apprepository.Form4Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm4(res)
+	err = u.DBForm.CreateForm4(res)
 	if err != nil {
 		return err
 	}
@@ -209,9 +202,9 @@ func (u *formService) CreateForm4(form apprepository.Form4Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm5(form apprepository.Form5Request) error {
+func (u *formService) CreateForm5(form domain.Form5Request) error {
 
-	res := []entity.Table5{}
+	res := []domain.Table5{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -223,7 +216,7 @@ func (u *formService) CreateForm5(form apprepository.Form5Request) error {
 	}
 
 	for _, integrante := range form.Integrante {
-		res = append(res, entity.Table5{
+		res = append(res, domain.Table5{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona,
 			EnfermedadReferida: integrante.EnfermedadReferida,
@@ -231,7 +224,7 @@ func (u *formService) CreateForm5(form apprepository.Form5Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm5(res)
+	err = u.DBForm.CreateForm5(res)
 	if err != nil {
 		return err
 	}
@@ -239,9 +232,9 @@ func (u *formService) CreateForm5(form apprepository.Form5Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm6(form apprepository.Form6Request) error {
+func (u *formService) CreateForm6(form domain.Form6Request) error {
 
-	res := []entity.Table6{}
+	res := []domain.Table6{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -264,7 +257,7 @@ func (u *formService) CreateForm6(form apprepository.Form6Request) error {
 			return err
 		}
 
-		res = append(res, entity.Table6{
+		res = append(res, domain.Table6{
 			EncuestadorID:     encuestador.ID,
 			ZonaID:            zona,
 			Sexo:              integrante.Sexo,
@@ -275,7 +268,7 @@ func (u *formService) CreateForm6(form apprepository.Form6Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm6(res)
+	err = u.DBForm.CreateForm6(res)
 	if err != nil {
 		return err
 	}
@@ -283,9 +276,9 @@ func (u *formService) CreateForm6(form apprepository.Form6Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm7(form apprepository.Form7Request) error {
+func (u *formService) CreateForm7(form domain.Form7Request) error {
 
-	res := []entity.Table7{}
+	res := []domain.Table7{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -308,7 +301,7 @@ func (u *formService) CreateForm7(form apprepository.Form7Request) error {
 			return err
 		}
 
-		res = append(res, entity.Table7{
+		res = append(res, domain.Table7{
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona,
 			Sexo:          integrante.Sexo,
@@ -320,7 +313,7 @@ func (u *formService) CreateForm7(form apprepository.Form7Request) error {
 
 	}
 
-	err = u.formRepository.CreateForm7(res)
+	err = u.DBForm.CreateForm7(res)
 	if err != nil {
 		return err
 	}
@@ -328,9 +321,9 @@ func (u *formService) CreateForm7(form apprepository.Form7Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm8(form apprepository.Form8Request) error {
+func (u *formService) CreateForm8(form domain.Form8Request) error {
 
-	res := []entity.Table8{}
+	res := []domain.Table8{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -348,7 +341,7 @@ func (u *formService) CreateForm8(form apprepository.Form8Request) error {
 			return err
 		}
 
-		res = append(res, entity.Table8{
+		res = append(res, domain.Table8{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona,
 			AñoNacimientoPerdida: AñoNacimientoPerdida,
@@ -361,7 +354,7 @@ func (u *formService) CreateForm8(form apprepository.Form8Request) error {
 
 	}
 
-	err = u.formRepository.CreateForm8(res)
+	err = u.DBForm.CreateForm8(res)
 	if err != nil {
 		return err
 	}
@@ -369,9 +362,9 @@ func (u *formService) CreateForm8(form apprepository.Form8Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm8_1(form apprepository.Form8_1Request) error {
+func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
 
-	res := []entity.Table8_1{}
+	res := []domain.Table8_1{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -389,7 +382,7 @@ func (u *formService) CreateForm8_1(form apprepository.Form8_1Request) error {
 			return err
 		}
 
-		res = append(res, entity.Table8_1{
+		res = append(res, domain.Table8_1{
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona,
 			AñoPerdida:    AñoPerdida,
@@ -397,7 +390,7 @@ func (u *formService) CreateForm8_1(form apprepository.Form8_1Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm8_1(res)
+	err = u.DBForm.CreateForm8_1(res)
 	if err != nil {
 		return err
 	}
@@ -405,9 +398,9 @@ func (u *formService) CreateForm8_1(form apprepository.Form8_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm9(form apprepository.Form9Request) error {
+func (u *formService) CreateForm9(form domain.Form9Request) error {
 
-	res := []entity.Table9{}
+	res := []domain.Table9{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -419,7 +412,7 @@ func (u *formService) CreateForm9(form apprepository.Form9Request) error {
 	}
 
 	for _, integrante := range form.Integrante {
-		res = append(res, entity.Table9{
+		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona,
 			BajoPeso:             integrante.BajoPeso,
@@ -430,7 +423,7 @@ func (u *formService) CreateForm9(form apprepository.Form9Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm9(res)
+	err = u.DBForm.CreateForm9(res)
 	if err != nil {
 		return err
 	}
@@ -438,9 +431,9 @@ func (u *formService) CreateForm9(form apprepository.Form9Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm9_1(form apprepository.Form9_1Request) error {
+func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
 
-	res := []entity.Table9_1{}
+	res := []domain.Table9_1{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -458,7 +451,7 @@ func (u *formService) CreateForm9_1(form apprepository.Form9_1Request) error {
 			return err
 		}
 
-		res = append(res, entity.Table9_1{
+		res = append(res, domain.Table9_1{
 			EncuestadorID:    encuestador.ID,
 			ZonaID:           zona,
 			Año:              año,
@@ -467,7 +460,7 @@ func (u *formService) CreateForm9_1(form apprepository.Form9_1Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm9_1(res)
+	err = u.DBForm.CreateForm9_1(res)
 	if err != nil {
 		return err
 	}
@@ -475,9 +468,9 @@ func (u *formService) CreateForm9_1(form apprepository.Form9_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm10(form apprepository.Form10Request) error {
+func (u *formService) CreateForm10(form domain.Form10Request) error {
 
-	res := []entity.Table10{}
+	res := []domain.Table10{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -490,7 +483,7 @@ func (u *formService) CreateForm10(form apprepository.Form10Request) error {
 
 	for _, integrante := range form.Integrante {
 
-		res = append(res, entity.Table10{
+		res = append(res, domain.Table10{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona,
 			DiscapacidadReferida: integrante.DiscapacidadReferida,
@@ -499,7 +492,7 @@ func (u *formService) CreateForm10(form apprepository.Form10Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm10(res)
+	err = u.DBForm.CreateForm10(res)
 	if err != nil {
 		return err
 	}
@@ -507,9 +500,9 @@ func (u *formService) CreateForm10(form apprepository.Form10Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm10_1(form apprepository.Form10_1Request) error {
+func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
 
-	res := []entity.Table10_1{}
+	res := []domain.Table10_1{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -522,7 +515,7 @@ func (u *formService) CreateForm10_1(form apprepository.Form10_1Request) error {
 
 	for _, integrante := range form.Integrante {
 
-		res = append(res, entity.Table10_1{
+		res = append(res, domain.Table10_1{
 			EncuestadorID:    encuestador.ID,
 			ZonaID:           zona,
 			SiDonde:          integrante.SiDonde,
@@ -531,7 +524,7 @@ func (u *formService) CreateForm10_1(form apprepository.Form10_1Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm10_1(res)
+	err = u.DBForm.CreateForm10_1(res)
 	if err != nil {
 		return err
 	}
@@ -539,9 +532,9 @@ func (u *formService) CreateForm10_1(form apprepository.Form10_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm11(form apprepository.Form11Request) error {
+func (u *formService) CreateForm11(form domain.Form11Request) error {
 
-	res := []entity.Table11{}
+	res := []domain.Table11{}
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
@@ -554,7 +547,7 @@ func (u *formService) CreateForm11(form apprepository.Form11Request) error {
 
 	for _, integrante := range form.Integrante {
 
-		res = append(res, entity.Table11{
+		res = append(res, domain.Table11{
 			EncuestadorID:  encuestador.ID,
 			ZonaID:         zona,
 			NombreFarmaco:  integrante.NombreFarmaco,
@@ -564,7 +557,7 @@ func (u *formService) CreateForm11(form apprepository.Form11Request) error {
 		})
 	}
 
-	err = u.formRepository.CreateForm11(res)
+	err = u.DBForm.CreateForm11(res)
 	if err != nil {
 		return err
 	}
@@ -572,9 +565,9 @@ func (u *formService) CreateForm11(form apprepository.Form11Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm12(form apprepository.Form12) error {
+func (u *formService) CreateForm12(form domain.Form12) error {
 
-	res := entity.Table12{}
+	res := domain.Table12{}
 
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
@@ -591,7 +584,7 @@ func (u *formService) CreateForm12(form apprepository.Form12) error {
 	res.HayProblema = form.HayProblema
 	res.QueProblema = form.QueProblema
 
-	err = u.formRepository.CreateForm12(res)
+	err = u.DBForm.CreateForm12(res)
 	if err != nil {
 		return err
 	}
@@ -599,9 +592,9 @@ func (u *formService) CreateForm12(form apprepository.Form12) error {
 	return nil
 }
 
-func (u *formService) CreateForm13(form apprepository.Form13) error {
+func (u *formService) CreateForm13(form domain.Form13) error {
 
-	res := entity.Table13{}
+	res := domain.Table13{}
 
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
@@ -618,7 +611,7 @@ func (u *formService) CreateForm13(form apprepository.Form13) error {
 	res.HayContaminacion = form.HayContaminacion
 	res.CualEs = form.CualEs
 
-	err = u.formRepository.CreateForm13(res)
+	err = u.DBForm.CreateForm13(res)
 	if err != nil {
 		return err
 	}
@@ -626,9 +619,9 @@ func (u *formService) CreateForm13(form apprepository.Form13) error {
 	return nil
 }
 
-func (u *formService) CreateForm14(form apprepository.Form14Request) error {
+func (u *formService) CreateForm14(form domain.Form14Request) error {
 
-	res := []entity.Table14{}
+	res := []domain.Table14{}
 
 	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
 	if err != nil {
@@ -642,14 +635,14 @@ func (u *formService) CreateForm14(form apprepository.Form14Request) error {
 
 	for _, integrante := range form.Integrante {
 
-		res = append(res, entity.Table14{
+		res = append(res, domain.Table14{
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona,
 			Tiempo:        integrante.Tiempo,
 		})
 	}
 
-	err = u.formRepository.CreateForm14(res)
+	err = u.DBForm.CreateForm14(res)
 	if err != nil {
 		return err
 	}

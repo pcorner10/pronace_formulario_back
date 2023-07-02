@@ -25,27 +25,6 @@ type FormDB interface {
 	CreateForm14(table14 []Table14) error
 }
 
-type FormService interface {
-	CreateForm0(table0 []Table0) error
-	CreateForm1(table1 Table1) error
-	CreateForm2(table2 Table2) error
-	CreateForm3(table3 Table3) error
-	CreateForm4(table4 []Table4) error
-	CreateForm5(table5 []Table5) error
-	CreateForm6(table6 []Table6) error
-	CreateForm7(table7 []Table7) error
-	CreateForm8(table8 []Table8) error
-	CreateForm8_1(table8_1 []Table8_1) error
-	CreateForm9(table9 []Table9) error
-	CreateForm9_1(table9 []Table9_1) error
-	CreateForm10(table10 []Table10) error
-	CreateForm10_1(table10 []Table10_1) error
-	CreateForm11(table11 []Table11) error
-	CreateForm12(table12 Table12) error
-	CreateForm13(table13 Table13) error
-	CreateForm14(table14 []Table14) error
-}
-
 type Zona struct {
 	ID        uint      `json:"id" gorm:"primaryKey"`
 	Municipio string    `json:"municipio"`
