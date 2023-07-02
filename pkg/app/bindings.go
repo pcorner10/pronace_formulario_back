@@ -19,6 +19,18 @@ func BindAuth(dbReq *gorm.DB) *ihttp.AuthHandler {
 	return handler
 }
 
+func BindUser(dbReq *gorm.DB) *ihttp.UserHandler {
+	userDB, err := db.NewUserGorm(dbReq)
+	if err != nil {
+		return nil
+	}
+
+	service := NewUserService(userDB)
+	handler := ihttp.NewUserHandler(service)
+
+	return handler
+}
+
 func BindForm(dbReq *gorm.DB) *ihttp.FormHandler {
 	formDB, err := db.NewFormGorm(dbReq)
 	if err != nil {

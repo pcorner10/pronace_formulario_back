@@ -1,7 +1,8 @@
 package domain
 
 type ZonaDB interface {
-	CreateZona(zona Zona) error
+	FirstOrCreateZona(zona Zona) (*Zona, error)
+	CreateZona(zona Zona) (*Zona, error)
 	GetZonaByID(zonaID uint) (*Zona, error)
 	GetZonaID(zona Zona) (uint, error)
 }

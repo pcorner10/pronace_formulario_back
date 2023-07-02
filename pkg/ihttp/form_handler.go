@@ -30,6 +30,7 @@ func (h *FormHandler) CreateForm0(ctx *gin.Context) {
 	// Perform a type assertion to convert the interface{} returned by CreateForm to a *entity.Table0
 	err = h.formService.CreateForm0(*res)
 	if err != nil {
+		fmt.Println("error", err.Error())
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}

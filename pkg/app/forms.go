@@ -24,12 +24,11 @@ func (u *formService) CreateForm0(req domain.Form0Request) error {
 	form := []domain.Table0{}
 
 	encuestador, err := u.DBUser.GetByEmail(req.EncuestadorEmail)
-
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(req.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(req.Zona)
 	if err != nil {
 		return err
 	}
@@ -55,7 +54,7 @@ func (u *formService) CreateForm0(req domain.Form0Request) error {
 
 		form = append(form, domain.Table0{
 			EncuestadorID: encuestador.ID,
-			ZonaID:        zona,
+			ZonaID:        zona.ID,
 			Sexo:          integrante.Sexo,
 			Edad:          edad,
 			Parentesco:    integrante.Parentesco,
@@ -86,7 +85,7 @@ func (u *formService) CreateForm1(form domain.Form1) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -97,7 +96,7 @@ func (u *formService) CreateForm1(form domain.Form1) error {
 	}
 
 	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona
+	res.ZonaID = zona.ID
 	res.TieneElectricidad = form.TieneElectricidad
 	res.FuentesAgua = form.FuentesAgua
 	res.TieneGas = form.TieneGas
@@ -124,13 +123,13 @@ func (u *formService) CreateForm2(form domain.Form2) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
 
 	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona
+	res.ZonaID = zona.ID
 	res.LlaveInterior = form.LlaveInterior
 	res.Garrafon = form.Garrafon
 	res.LlaveComunitaria = form.LlaveComunitaria
@@ -151,13 +150,13 @@ func (u *formService) CreateForm3(form domain.Form3) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
 
 	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona
+	res.ZonaID = zona.ID
 	res.Imss = form.Imss
 	res.Issste = form.Issste
 	res.SeguroPopular = form.SeguroPopular
@@ -180,7 +179,7 @@ func (u *formService) CreateForm4(form domain.Form4Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -188,7 +187,7 @@ func (u *formService) CreateForm4(form domain.Form4Request) error {
 	for _, integrante := range form.Integrante {
 		res = append(res, domain.Table4{
 			EncuestadorID:      encuestador.ID,
-			ZonaID:             zona,
+			ZonaID:             zona.ID,
 			EnfermedadReferida: integrante.EnfermedadReferida,
 			EnfermedadRecabada: integrante.EnfermedadRecabada,
 		})
@@ -210,7 +209,7 @@ func (u *formService) CreateForm5(form domain.Form5Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -218,7 +217,7 @@ func (u *formService) CreateForm5(form domain.Form5Request) error {
 	for _, integrante := range form.Integrante {
 		res = append(res, domain.Table5{
 			EncuestadorID:      encuestador.ID,
-			ZonaID:             zona,
+			ZonaID:             zona.ID,
 			EnfermedadReferida: integrante.EnfermedadReferida,
 			EnfermedadRecabada: integrante.EnfermedadRecabada,
 		})
@@ -240,7 +239,7 @@ func (u *formService) CreateForm6(form domain.Form6Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -259,7 +258,7 @@ func (u *formService) CreateForm6(form domain.Form6Request) error {
 
 		res = append(res, domain.Table6{
 			EncuestadorID:     encuestador.ID,
-			ZonaID:            zona,
+			ZonaID:            zona.ID,
 			Sexo:              integrante.Sexo,
 			AñoFallecimiento:  AñoFallecimiento,
 			EdadFallecimiento: EdadFallecimiento,
@@ -284,7 +283,7 @@ func (u *formService) CreateForm7(form domain.Form7Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -303,7 +302,7 @@ func (u *formService) CreateForm7(form domain.Form7Request) error {
 
 		res = append(res, domain.Table7{
 			EncuestadorID: encuestador.ID,
-			ZonaID:        zona,
+			ZonaID:        zona.ID,
 			Sexo:          integrante.Sexo,
 			EdadDetection: EdadDetection,
 			AñoDetection:  AñoDetection,
@@ -329,7 +328,7 @@ func (u *formService) CreateForm8(form domain.Form8Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -343,7 +342,7 @@ func (u *formService) CreateForm8(form domain.Form8Request) error {
 
 		res = append(res, domain.Table8{
 			EncuestadorID:        encuestador.ID,
-			ZonaID:               zona,
+			ZonaID:               zona.ID,
 			AñoNacimientoPerdida: AñoNacimientoPerdida,
 			EnCurso:              integrante.EnCurso,
 			TipoParto:            integrante.TipoParto,
@@ -370,7 +369,7 @@ func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -384,7 +383,7 @@ func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
 
 		res = append(res, domain.Table8_1{
 			EncuestadorID: encuestador.ID,
-			ZonaID:        zona,
+			ZonaID:        zona.ID,
 			AñoPerdida:    AñoPerdida,
 			Trimestre:     integrante.Trimestre,
 		})
@@ -406,7 +405,7 @@ func (u *formService) CreateForm9(form domain.Form9Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -414,7 +413,7 @@ func (u *formService) CreateForm9(form domain.Form9Request) error {
 	for _, integrante := range form.Integrante {
 		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
-			ZonaID:               zona,
+			ZonaID:               zona.ID,
 			BajoPeso:             integrante.BajoPeso,
 			Prematuro:            integrante.Prematuro,
 			Malformacion:         integrante.Malformacion,
@@ -439,7 +438,7 @@ func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -453,7 +452,7 @@ func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
 
 		res = append(res, domain.Table9_1{
 			EncuestadorID:    encuestador.ID,
-			ZonaID:           zona,
+			ZonaID:           zona.ID,
 			Año:              año,
 			ProblemaReferido: integrante.ProblemaReferido,
 			ProblemaRecabado: integrante.ProblemaRecabado,
@@ -476,7 +475,7 @@ func (u *formService) CreateForm10(form domain.Form10Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -485,7 +484,7 @@ func (u *formService) CreateForm10(form domain.Form10Request) error {
 
 		res = append(res, domain.Table10{
 			EncuestadorID:        encuestador.ID,
-			ZonaID:               zona,
+			ZonaID:               zona.ID,
 			DiscapacidadReferida: integrante.DiscapacidadReferida,
 			DiscapacidadRecabada: integrante.DiscapacidadRecabada,
 			TipoCondicion:        integrante.TipoCondicion,
@@ -508,7 +507,7 @@ func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -517,7 +516,7 @@ func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
 
 		res = append(res, domain.Table10_1{
 			EncuestadorID:    encuestador.ID,
-			ZonaID:           zona,
+			ZonaID:           zona.ID,
 			SiDonde:          integrante.SiDonde,
 			NoPorque:         integrante.NoPorque,
 			TieneCertificado: integrante.TieneCertificado,
@@ -540,7 +539,7 @@ func (u *formService) CreateForm11(form domain.Form11Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -549,7 +548,7 @@ func (u *formService) CreateForm11(form domain.Form11Request) error {
 
 		res = append(res, domain.Table11{
 			EncuestadorID:  encuestador.ID,
-			ZonaID:         zona,
+			ZonaID:         zona.ID,
 			NombreFarmaco:  integrante.NombreFarmaco,
 			EsPrescrito:    integrante.EsPrescrito,
 			MotivoReferido: integrante.MotivoReferido,
@@ -574,13 +573,13 @@ func (u *formService) CreateForm12(form domain.Form12) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
 
 	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona
+	res.ZonaID = zona.ID
 	res.HayProblema = form.HayProblema
 	res.QueProblema = form.QueProblema
 
@@ -601,13 +600,13 @@ func (u *formService) CreateForm13(form domain.Form13) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
 
 	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona
+	res.ZonaID = zona.ID
 	res.HayContaminacion = form.HayContaminacion
 	res.CualEs = form.CualEs
 
@@ -628,7 +627,7 @@ func (u *formService) CreateForm14(form domain.Form14Request) error {
 		return err
 	}
 
-	zona, err := u.DBZona.GetZonaID(form.Zona)
+	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -637,7 +636,7 @@ func (u *formService) CreateForm14(form domain.Form14Request) error {
 
 		res = append(res, domain.Table14{
 			EncuestadorID: encuestador.ID,
-			ZonaID:        zona,
+			ZonaID:        zona.ID,
 			Tiempo:        integrante.Tiempo,
 		})
 	}

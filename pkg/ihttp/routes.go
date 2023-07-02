@@ -6,7 +6,7 @@ import (
 
 func SetupRoutes(router *gin.Engine, authHandler *AuthHandler, formHandler *FormHandler) {
 
-	public := router.Group("/api")
+	public := router.Group("/public")
 	{
 		public.POST("/login", authHandler.Login)
 		public.POST("/register", authHandler.Register)

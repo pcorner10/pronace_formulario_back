@@ -18,7 +18,7 @@ func NewUserGorm(db *gorm.DB) (*UserGorm, error) {
 
 func (r *UserGorm) Create(user domain.User) error {
 	// implementar la lógica de crear un usuario con GORM
-	err := r.db.Create(user).Error
+	err := r.db.Create(&user).Error
 	if err != nil {
 		return err
 	}

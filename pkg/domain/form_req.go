@@ -21,7 +21,7 @@ type FormService interface {
 	CreateForm14(req Form14Request) error
 }
 type Form0Request struct {
-	EncuestadorEmail string  `json:"encuestador_email"`
+	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
 	Integrante       []Form0 `json:"integrante"`
 }

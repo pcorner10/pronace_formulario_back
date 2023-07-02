@@ -16,14 +16,22 @@ func NewZonaGorm(db *gorm.DB) (domain.ZonaDB, error) {
 	}, nil
 }
 
-func (r *zonaGorm) CreateZona(zona domain.Zona) error {
-
-	err := r.db.Create(&zona).Error
+func (r *zonaGorm) FirstOrCreateZona(zona domain.Zona) (*domain.Zona, error) {
+	err := r.db.FirstOrCreate(&zona, zona).Error
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return &zona, nil
+}
+
+func (r *zonaGorm) CreateZona(zona domain.Zona) (*domain.Zona, error) {
+	err := r.db.Create(&zona).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &zona, nil
 }
 
 func (r *zonaGorm) GetZonaByID(zonaID uint) (*domain.Zona, error) {
@@ -50,7 +58,7 @@ func (r *zonaGorm) GetZonaID(zona domain.Zona) (uint, error) {
 
 	err := r.db.Where(query,
 		zona.Municipio, zona.Localidad, zona.Colonia, zona.Manzana, zona.Lote,
-	).First(&zonaID).Error
+	).First(&zona).Error
 	// if record not found, return record not found error
 	if err == gorm.ErrRecordNotFound {
 		return 0, err
@@ -59,6 +67,8 @@ func (r *zonaGorm) GetZonaID(zona domain.Zona) (uint, error) {
 	if err != nil {
 		return 0, err
 	}
+
+	zonaID = zona.ID
 
 	return zonaID, nil
 }
