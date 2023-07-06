@@ -39,8 +39,8 @@ func (h *FormHandler) CreateForm0(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
-func (h *FormHandler) CretateForm1(ctx *gin.Context) {
-	res := &domain.Form1{}
+func (h *FormHandler) CretateForm123(ctx *gin.Context) {
+	res := &domain.Form123Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -48,43 +48,7 @@ func (h *FormHandler) CretateForm1(ctx *gin.Context) {
 		return
 	}
 
-	err = h.formService.CreateForm1(*res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	ctx.JSON(200, gin.H{"status": "successfully created"})
-}
-
-func (h *FormHandler) CretateForm2(ctx *gin.Context) {
-	res := &domain.Form2{}
-
-	err := ctx.BindJSON(&res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	err = h.formService.CreateForm2(*res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	ctx.JSON(200, gin.H{"status": "successfully created"})
-}
-
-func (h *FormHandler) CretateForm3(ctx *gin.Context) {
-	res := &domain.Form3{}
-
-	err := ctx.BindJSON(&res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	err = h.formService.CreateForm3(*res)
+	err = h.formService.CreateForm123(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -156,6 +120,9 @@ func (h *FormHandler) CretateForm7(ctx *gin.Context) {
 		return
 	}
 
+	// print res with all the data
+	fmt.Printf("%+v\n", res)
+	
 	err = h.formService.CreateForm7(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
@@ -291,8 +258,8 @@ func (h *FormHandler) CretateForm11(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{"status": "successfully created"})
 }
 
-func (h *FormHandler) CretateForm12(ctx *gin.Context) {
-	res := &domain.Form12{}
+func (h *FormHandler) CretateForm1213(ctx *gin.Context) {
+	res := &domain.Form1213Request{}
 
 	err := ctx.BindJSON(&res)
 	if err != nil {
@@ -300,25 +267,7 @@ func (h *FormHandler) CretateForm12(ctx *gin.Context) {
 		return
 	}
 
-	err = h.formService.CreateForm12(*res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	ctx.JSON(200, gin.H{"status": "successfully created"})
-}
-
-func (h *FormHandler) CretateForm13(ctx *gin.Context) {
-	res := &domain.Form13{}
-
-	err := ctx.BindJSON(&res)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
-
-	err = h.formService.CreateForm13(*res)
+	err = h.formService.CreateForm1213(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return

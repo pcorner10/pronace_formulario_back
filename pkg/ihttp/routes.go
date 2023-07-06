@@ -18,9 +18,7 @@ func SetupRoutes(router *gin.Engine, authHandler *AuthHandler, formHandler *Form
 	forms := private.Group("/forms")
 	{
 		forms.POST("/form0", formHandler.CreateForm0)
-		forms.POST("/form1", formHandler.CretateForm1)
-		forms.POST("/form2", formHandler.CretateForm2)
-		forms.POST("/form3", formHandler.CretateForm3)
+		forms.POST("/form123", formHandler.CretateForm123)
 		forms.POST("/form4", formHandler.CretateForm4)
 		forms.POST("/form5", formHandler.CretateForm5)
 		forms.POST("/form6", formHandler.CretateForm6)
@@ -32,8 +30,7 @@ func SetupRoutes(router *gin.Engine, authHandler *AuthHandler, formHandler *Form
 		forms.POST("/form10", formHandler.CretateForm10)
 		forms.POST("/form10_1", formHandler.CretateForm10_1)
 		forms.POST("/form11", formHandler.CretateForm11)
-		forms.POST("/form12", formHandler.CretateForm12)
-		forms.POST("/form13", formHandler.CretateForm13)
+		forms.POST("/form12", formHandler.CretateForm1213)
 		forms.POST("/form14", formHandler.CretateForm14)
 
 	}
