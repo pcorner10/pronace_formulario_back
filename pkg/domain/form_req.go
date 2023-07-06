@@ -22,6 +22,7 @@ type FormService interface {
 	CreateForm13(req Form13, encuestador User, zona Zona) error
 	CreateForm14(req Form14Request) error
 }
+
 type Form0Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
@@ -152,9 +153,9 @@ type Form8_1Request struct {
 }
 
 type Form9 struct {
-	BajoPeso             string `json:"bajo_peso"`
-	Prematuro            string `json:"prematuro"`
-	Malformacion         string `json:"malformacion"`
+	BajoPeso             bool `json:"bajo_peso"`
+	Prematuro            bool `json:"prematuro"`
+	Malformacion         bool `json:"malformacion"`
 	MalformacionReferida string `json:"malformacion_referida"`
 	MalformacionRecabada string `json:"malformacion_recabada"`
 }

@@ -414,6 +414,7 @@ func (u *formService) CreateForm9(form domain.Form9Request) error {
 	}
 
 	for _, integrante := range form.Integrante {
+
 		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona.ID,
@@ -571,7 +572,7 @@ func (u *formService) CreateForm1213(forms domain.Form1213Request) error {
 
 	encuestador, err := u.DBUser.GetByEmail(forms.EncuestadorEmail)
 	if err != nil {
-		return err;
+		return err
 	}
 
 	zona, err := u.DBZona.FirstOrCreateZona(forms.Zona)

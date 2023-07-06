@@ -122,7 +122,7 @@ func (h *FormHandler) CretateForm7(ctx *gin.Context) {
 
 	// print res with all the data
 	fmt.Printf("%+v\n", res)
-	
+
 	err = h.formService.CreateForm7(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
@@ -176,6 +176,8 @@ func (h *FormHandler) CretateForm9(ctx *gin.Context) {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
+
+	fmt.Printf("%+v\n", res)
 
 	err = h.formService.CreateForm9(*res)
 	if err != nil {

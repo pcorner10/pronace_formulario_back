@@ -29,7 +29,7 @@ type Zona struct {
 	ID        uint      `json:"id" gorm:"primaryKey"`
 	Municipio string    `json:"municipio"`
 	Localidad string    `json:"localidad"`
-	Colonia   string    `json:"colonia"`
+	Ageb      string    `json:"ageb"`
 	Manzana   string    `json:"manzana"`
 	Lote      string    `json:"lote"`
 	CreatedAt time.Time `json:"created_at"`
@@ -171,9 +171,9 @@ type Table9 struct {
 	ID                   uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID        uint      `json:"encuestador_id"`
 	ZonaID               uint      `json:"zona_id"`
-	BajoPeso             string    `json:"bajo_peso"`
-	Prematuro            string    `json:"prematuro"`
-	Malformacion         string    `json:"malformacion"`
+	BajoPeso             bool      `json:"bajo_peso"`
+	Prematuro            bool      `json:"prematuro"`
+	Malformacion         bool    `json:"malformacion"`
 	MalformacionReferida string    `json:"malformacion_referida"`
 	MalformacionRecabada string    `json:"malformacion_recabada"`
 	CreatedAt            time.Time `json:"created_at"`

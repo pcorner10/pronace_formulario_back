@@ -13,7 +13,7 @@ func Migrate(db *gorm.DB) {
 		&domain.Table6{}, &domain.Table7{}, &domain.Table8{}, &domain.Table8_1{},
 		&domain.Table9{}, &domain.Table9_1{}, &domain.Table10{}, &domain.Table10_1{},
 		&domain.Table11{}, &domain.Table12{}, &domain.Table13{},
-		&domain.Table14{},
+		&domain.Table14{}, &domain.Logs{},
 	)
 
 	if err != nil {

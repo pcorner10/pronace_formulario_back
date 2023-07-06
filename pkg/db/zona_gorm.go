@@ -52,12 +52,12 @@ func (r *zonaGorm) GetZonaID(zona domain.Zona) (uint, error) {
 	query := `
 		municipio = ? AND 
 		localidad = ? AND 
-		colonia = ? AND
+		ageb = ? AND
 		manzana = ? AND
 		lote = ?`
 
 	err := r.db.Where(query,
-		zona.Municipio, zona.Localidad, zona.Colonia, zona.Manzana, zona.Lote,
+		zona.Municipio, zona.Localidad, zona.Ageb, zona.Manzana, zona.Lote,
 	).First(&zona).Error
 	// if record not found, return record not found error
 	if err == gorm.ErrRecordNotFound {
