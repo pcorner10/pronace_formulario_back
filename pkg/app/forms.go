@@ -358,7 +358,7 @@ func (u *surveyService) CreateForm7(form interface{}) error {
 
 		EdadDetection, err := strconv.Atoi(integrante.EdadDetection)
 		if err != nil {
-			fmt.Println(integrante.EdadDetection)
+			
 			return fmt.Errorf("error al convertir edad de deteccion: %v", err)
 		}
 

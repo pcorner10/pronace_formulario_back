@@ -2,6 +2,7 @@ package app
 
 import (
 	"errors"
+	"fmt"
 	"pronaces_back/pkg/domain"
 	"pronaces_back/pkg/ihttp"
 )
@@ -36,9 +37,14 @@ func (u *surveyService) LoginUser(email, password string) (*domain.ReponseLogin,
 
 func (u *surveyService) RegisterUser(user *domain.User) error {
 	// Verificar si el usuario ya existe
+
 	_, err := u.DB.GetUserByEmail(user.Email)
 	if err == nil {
 		return errors.New("user already exists")
+	}
+
+	if err != nil {
+		fmt.Println("Hay problemas al buscar el usuario")
 	}
 
 	// Encriptar contraseña

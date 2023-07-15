@@ -13,7 +13,7 @@ browser:
 logs:
 	gcloud app logs tail -s default
 
-rundeply:
+rundeploy:
 	gcloud run deploy pronace_formulario_back \
 	--region=us-central1 \
 	--source=. \
@@ -22,3 +22,4 @@ rundeply:
 	--set-env-vars DB_USER="quickstart-service-account@${GOOGLE_CLOUD_PROJECT}.iam" \
 	--service-account="quickstart-service-account@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com" \
 	--allow-unauthenticated
+	

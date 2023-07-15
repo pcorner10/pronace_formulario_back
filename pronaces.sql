@@ -1,6 +1,42 @@
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Sequence and defined type
+CREATE SEQUENCE IF NOT EXISTS users_id_seq;
+
+-- Table Definition
+CREATE TABLE "public"."users" (
+    "id" int8 NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    "created_at" timestamptz,
+    "updated_at" timestamptz,
+    "deleted_at" timestamptz,
+    "user_name" text NOT NULL,
+    "password" text NOT NULL,
+    "role" text NOT NULL,
+    "email" text NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+-- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
+
+-- Sequence and defined type
+CREATE SEQUENCE IF NOT EXISTS zonas_id_seq;
+
+-- Table Definition
+CREATE TABLE "public"."zonas" (
+    "id" int8 NOT NULL DEFAULT nextval('zonas_id_seq'::regclass),
+    "municipio" text,
+    "localidad" text,
+    "ageb" text,
+    "manzana" text,
+    "lote" text,
+    "created_at" timestamptz,
+    "updated_at" timestamptz,
+    PRIMARY KEY ("id")
+);
+
+-- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
+
+-- Sequence and defined type
 CREATE SEQUENCE IF NOT EXISTS logs_id_seq;
 
 -- Table Definition
@@ -357,39 +393,4 @@ CREATE TABLE "public"."table9_1" (
     PRIMARY KEY ("id")
 );
 
--- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
-
--- Sequence and defined type
-CREATE SEQUENCE IF NOT EXISTS users_id_seq;
-
--- Table Definition
-CREATE TABLE "public"."users" (
-    "id" int8 NOT NULL DEFAULT nextval('users_id_seq'::regclass),
-    "created_at" timestamptz,
-    "updated_at" timestamptz,
-    "deleted_at" timestamptz,
-    "user_name" text NOT NULL,
-    "password" text NOT NULL,
-    "role" text NOT NULL,
-    "email" text NOT NULL,
-    PRIMARY KEY ("id")
-);
-
--- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
-
--- Sequence and defined type
-CREATE SEQUENCE IF NOT EXISTS zonas_id_seq;
-
--- Table Definition
-CREATE TABLE "public"."zonas" (
-    "id" int8 NOT NULL DEFAULT nextval('zonas_id_seq'::regclass),
-    "municipio" text,
-    "localidad" text,
-    "ageb" text,
-    "manzana" text,
-    "lote" text,
-    "created_at" timestamptz,
-    "updated_at" timestamptz,
-    PRIMARY KEY ("id")
-);
 

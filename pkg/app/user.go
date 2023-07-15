@@ -1,12 +1,16 @@
 package app
 
-import "pronaces_back/pkg/domain"
+import (
+	"fmt"
+	"pronaces_back/pkg/domain"
+)
 
 func (s *surveyService) CreateUser(user domain.User) error {
 	return s.DB.CreateUser(user)
 }
 
 func (s *surveyService) GetUserByEmail(email string) (*domain.User, error) {
+	fmt.Println("Pasmod por app GetUserByEmail")
 	return s.DB.GetUserByEmail(email)
 }
 

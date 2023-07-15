@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 func (h *Handler) HelloWorld(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
 }
@@ -38,7 +37,7 @@ func (h *Handler) Login(ctx *gin.Context) {
 
 func (h *Handler) Register(ctx *gin.Context) {
 	// Leer datos del cuerpo de la petición
-	var credentials = &domain.User{}
+	var credentials = domain.User{}
 
 	err := ctx.BindJSON(&credentials)
 	if err != nil {
@@ -47,7 +46,7 @@ func (h *Handler) Register(ctx *gin.Context) {
 	}
 
 	// Registrar usuario
-	err = h.service.RegisterUser(credentials)
+	err = h.service.RegisterUser(&credentials)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

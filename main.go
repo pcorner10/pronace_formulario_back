@@ -49,7 +49,6 @@ func Start(port string) {
 	if viper.GetBool("server.localenv") {
 		gin.SetMode(gin.DebugMode)
 		dbHandler, err = db.NewGormStore()
-
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
