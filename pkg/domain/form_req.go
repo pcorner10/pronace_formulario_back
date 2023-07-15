@@ -1,26 +1,37 @@
 package domain
 
 type FormService interface {
-	CreateForm0(req Form0Request) error
-	CreateForm123(req Form123Request) error
-	CreateForm1(req Form1, encuestador User, zona Zona) error
-	CreateForm2(req Form2, encuestador User, zona Zona) error
-	CreateForm3(req Form3, encuestador User, zona Zona) error
-	CreateForm4(req Form4Request) error
-	CreateForm5(req Form5Request) error
-	CreateForm6(req Form6Request) error
-	CreateForm7(req Form7Request) error
-	CreateForm8(req Form8Request) error
-	CreateForm8_1(req Form8_1Request) error
-	CreateForm9(req Form9Request) error
-	CreateForm9_1(req Form9_1Request) error
-	CreateForm10(req Form10Request) error
-	CreateForm10_1(req Form10_1Request) error
-	CreateForm11(req Form11Request) error
-	CreateForm1213(forms Form1213Request) error
-	CreateForm12(req Form12, encuestador User, zona Zona) error
-	CreateForm13(req Form13, encuestador User, zona Zona) error
-	CreateForm14(req Form14Request) error
+	LoginUser(email, password string) (*ReponseLogin, error)
+	RegisterUser(user *User) error
+
+	CreateUser(user User) error
+	GetUserByEmail(email string) (*User, error)
+	UpdateUser(user User) error
+	DeleteUser(userID uint64) error
+
+	FirstOrCreateZona(zona Zona) (*Zona, error)
+	CreateZona(zona Zona) (*Zona, error)
+	GetZonaByID(zonaID uint) (*Zona, error)
+	GetZonaID(zona Zona) (uint, error)
+
+	CreateForm0(table0 []Table0) error
+	CreateForm1(table1 Table1) error
+	CreateForm2(table2 Table2) error
+	CreateForm3(table3 Table3) error
+	CreateForm4(table4 []Table4) error
+	CreateForm5(table5 []Table5) error
+	CreateForm6(table6 []Table6) error
+	CreateForm7(table7 []Table7) error
+	CreateForm8(table8 []Table8) error
+	CreateForm8_1(table8_1 []Table8_1) error
+	CreateForm9(table9 []Table9) error
+	CreateForm9_1(table9 []Table9_1) error
+	CreateForm10(table10 []Table10) error
+	CreateForm10_1(table10 []Table10_1) error
+	CreateForm11(table11 []Table11) error
+	CreateForm12(table12 Table12) error
+	CreateForm13(table13 Table13) error
+	CreateForm14(table14 []Table14) error
 }
 
 type Form0Request struct {
@@ -153,9 +164,9 @@ type Form8_1Request struct {
 }
 
 type Form9 struct {
-	BajoPeso             bool `json:"bajo_peso"`
-	Prematuro            bool `json:"prematuro"`
-	Malformacion         bool `json:"malformacion"`
+	BajoPeso             bool   `json:"bajo_peso"`
+	Prematuro            bool   `json:"prematuro"`
+	Malformacion         bool   `json:"malformacion"`
 	MalformacionReferida string `json:"malformacion_referida"`
 	MalformacionRecabada string `json:"malformacion_recabada"`
 }

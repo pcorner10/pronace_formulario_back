@@ -6,17 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type zonaGorm struct {
-	db *gorm.DB
-}
-
-func NewZonaGorm(db *gorm.DB) (domain.ZonaDB, error) {
-	return &zonaGorm{
-		db: db,
-	}, nil
-}
-
-func (r *zonaGorm) FirstOrCreateZona(zona domain.Zona) (*domain.Zona, error) {
+func (r *gormStore) FirstOrCreateZona(zona domain.Zona) (*domain.Zona, error) {
 	err := r.db.FirstOrCreate(&zona, zona).Error
 	if err != nil {
 		return nil, err
@@ -25,7 +15,7 @@ func (r *zonaGorm) FirstOrCreateZona(zona domain.Zona) (*domain.Zona, error) {
 	return &zona, nil
 }
 
-func (r *zonaGorm) CreateZona(zona domain.Zona) (*domain.Zona, error) {
+func (r *gormStore) CreateZona(zona domain.Zona) (*domain.Zona, error) {
 	err := r.db.Create(&zona).Error
 	if err != nil {
 		return nil, err
@@ -34,7 +24,7 @@ func (r *zonaGorm) CreateZona(zona domain.Zona) (*domain.Zona, error) {
 	return &zona, nil
 }
 
-func (r *zonaGorm) GetZonaByID(zonaID uint) (*domain.Zona, error) {
+func (r *gormStore) GetZonaByID(zonaID uint) (*domain.Zona, error) {
 
 	var zona domain.Zona
 	err := r.db.Where("id = ?", zonaID).First(&zona).Error
@@ -45,7 +35,7 @@ func (r *zonaGorm) GetZonaByID(zonaID uint) (*domain.Zona, error) {
 	return &zona, nil
 }
 
-func (r *zonaGorm) GetZonaID(zona domain.Zona) (uint, error) {
+func (r *gormStore) GetZonaID(zona domain.Zona) (uint, error) {
 
 	var zonaID uint
 

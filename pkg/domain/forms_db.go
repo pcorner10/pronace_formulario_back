@@ -5,6 +5,19 @@ import (
 )
 
 type FormDB interface {
+	LoginUser(email, password string) (*ReponseLogin, error)
+	RegisterUser(user *User) error
+
+	CreateUser(user User) error
+	GetUserByEmail(email string) (*User, error)
+	UpdateUser(user User) error
+	DeleteUser(userID uint64) error
+
+	FirstOrCreateZona(zona Zona) (*Zona, error)
+	CreateZona(zona Zona) (*Zona, error)
+	GetZonaByID(zonaID uint) (*Zona, error)
+	GetZonaID(zona Zona) (uint, error)
+
 	CreateForm0(table0 []Table0) error
 	CreateForm1(table1 Table1) error
 	CreateForm2(table2 Table2) error
@@ -173,7 +186,7 @@ type Table9 struct {
 	ZonaID               uint      `json:"zona_id"`
 	BajoPeso             bool      `json:"bajo_peso"`
 	Prematuro            bool      `json:"prematuro"`
-	Malformacion         bool    `json:"malformacion"`
+	Malformacion         bool      `json:"malformacion"`
 	MalformacionReferida string    `json:"malformacion_referida"`
 	MalformacionRecabada string    `json:"malformacion_recabada"`
 	CreatedAt            time.Time `json:"created_at"`

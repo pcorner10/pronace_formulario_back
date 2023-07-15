@@ -10,7 +10,7 @@ import (
 
 var dbHandler *gorm.DB
 
-func NewGormStore() *gorm.DB {
+func NewGormStore1() *gorm.DB {
 
 	var err error
 

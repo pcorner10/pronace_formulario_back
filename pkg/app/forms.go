@@ -6,30 +6,26 @@ import (
 	"strconv"
 )
 
-type formService struct {
-	DBForm domain.FormDB
-	DBUser domain.UserDB
-	DBZona domain.ZonaDB
+type surveyService struct {
+	DB domain.FormDB
 }
 
-func NewFormService(dbForm domain.FormDB, dbUser domain.UserDB, dbZona domain.ZonaDB) domain.FormService {
-	return &formService{
-		DBForm: dbForm,
-		DBUser: dbUser,
-		DBZona: dbZona,
+func NewSurveyService(db domain.FormDB) domain.FormService {
+	return &surveyService{
+		DB: db,
 	}
 }
 
-func (u *formService) CreateForm0(req domain.Form0Request) error {
+func (u *surveyService) CreateForm0(req domain.Form0Request) error {
 
 	form := []domain.Table0{}
 
-	encuestador, err := u.DBUser.GetByEmail(req.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(req.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(req.Zona)
+	zona, err := u.DB.FirstOrCreateZona(req.Zona)
 	if err != nil {
 		return err
 	}
@@ -69,7 +65,7 @@ func (u *formService) CreateForm0(req domain.Form0Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm0(form)
+	err = u.DB.CreateForm0(form)
 	if err != nil {
 		return err
 	}
@@ -77,13 +73,13 @@ func (u *formService) CreateForm0(req domain.Form0Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm123(forms domain.Form123Request) error {
-	encuestador, err := u.DBUser.GetByEmail(forms.EncuestadorEmail)
+func (u *surveyService) CreateForm123(forms domain.Form123Request) error {
+	encuestador, err := u.DB.GetUserByEmail(forms.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(forms.Zona)
+	zona, err := u.DB.FirstOrCreateZona(forms.Zona)
 	if err != nil {
 		return err
 	}
@@ -106,7 +102,7 @@ func (u *formService) CreateForm123(forms domain.Form123Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm1(form domain.Form1, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm1(form domain.Form1, encuestador domain.User, zona domain.Zona) error {
 
 	res := domain.Table1{}
 	fmt.Println(form)
@@ -127,7 +123,7 @@ func (u *formService) CreateForm1(form domain.Form1, encuestador domain.User, zo
 	res.NumCuartos = NumCuartos
 	res.OloresDesagradables = form.OloresDesagradables
 
-	err = u.DBForm.CreateForm1(res)
+	err = u.DB.CreateForm1(res)
 	if err != nil {
 		return err
 	}
@@ -135,7 +131,7 @@ func (u *formService) CreateForm1(form domain.Form1, encuestador domain.User, zo
 	return nil
 }
 
-func (u *formService) CreateForm2(form domain.Form2, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm2(form domain.Form2, encuestador domain.User, zona domain.Zona) error {
 
 	res := domain.Table2{}
 
@@ -145,7 +141,7 @@ func (u *formService) CreateForm2(form domain.Form2, encuestador domain.User, zo
 	res.Garrafon = form.Garrafon
 	res.LlaveComunitaria = form.LlaveComunitaria
 
-	err := u.DBForm.CreateForm2(res)
+	err := u.DB.CreateForm2(res)
 	if err != nil {
 		return err
 	}
@@ -153,7 +149,7 @@ func (u *formService) CreateForm2(form domain.Form2, encuestador domain.User, zo
 	return nil
 }
 
-func (u *formService) CreateForm3(form domain.Form3, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm3(form domain.Form3, encuestador domain.User, zona domain.Zona) error {
 
 	res := domain.Table3{}
 
@@ -165,7 +161,7 @@ func (u *formService) CreateForm3(form domain.Form3, encuestador domain.User, zo
 	res.Privado = form.Privado
 	res.Ninguno = form.Ninguno
 
-	err := u.DBForm.CreateForm3(res)
+	err := u.DB.CreateForm3(res)
 	if err != nil {
 		return err
 	}
@@ -173,15 +169,15 @@ func (u *formService) CreateForm3(form domain.Form3, encuestador domain.User, zo
 	return nil
 }
 
-func (u *formService) CreateForm4(form domain.Form4Request) error {
+func (u *surveyService) CreateForm4(form domain.Form4Request) error {
 
 	res := []domain.Table4{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -195,7 +191,7 @@ func (u *formService) CreateForm4(form domain.Form4Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm4(res)
+	err = u.DB.CreateForm4(res)
 	if err != nil {
 		return err
 	}
@@ -203,15 +199,15 @@ func (u *formService) CreateForm4(form domain.Form4Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm5(form domain.Form5Request) error {
+func (u *surveyService) CreateForm5(form domain.Form5Request) error {
 
 	res := []domain.Table5{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -225,7 +221,7 @@ func (u *formService) CreateForm5(form domain.Form5Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm5(res)
+	err = u.DB.CreateForm5(res)
 	if err != nil {
 		return err
 	}
@@ -233,15 +229,15 @@ func (u *formService) CreateForm5(form domain.Form5Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm6(form domain.Form6Request) error {
+func (u *surveyService) CreateForm6(form domain.Form6Request) error {
 
 	res := []domain.Table6{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -269,7 +265,7 @@ func (u *formService) CreateForm6(form domain.Form6Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm6(res)
+	err = u.DB.CreateForm6(res)
 	if err != nil {
 		return err
 	}
@@ -277,15 +273,15 @@ func (u *formService) CreateForm6(form domain.Form6Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm7(form domain.Form7Request) error {
+func (u *surveyService) CreateForm7(form domain.Form7Request) error {
 
 	res := []domain.Table7{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -315,7 +311,7 @@ func (u *formService) CreateForm7(form domain.Form7Request) error {
 
 	}
 
-	err = u.DBForm.CreateForm7(res)
+	err = u.DB.CreateForm7(res)
 	if err != nil {
 		return err
 	}
@@ -323,15 +319,15 @@ func (u *formService) CreateForm7(form domain.Form7Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm8(form domain.Form8Request) error {
+func (u *surveyService) CreateForm8(form domain.Form8Request) error {
 
 	res := []domain.Table8{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -356,7 +352,7 @@ func (u *formService) CreateForm8(form domain.Form8Request) error {
 
 	}
 
-	err = u.DBForm.CreateForm8(res)
+	err = u.DB.CreateForm8(res)
 	if err != nil {
 		return err
 	}
@@ -364,15 +360,15 @@ func (u *formService) CreateForm8(form domain.Form8Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
+func (u *surveyService) CreateForm8_1(form domain.Form8_1Request) error {
 
 	res := []domain.Table8_1{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -392,7 +388,7 @@ func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm8_1(res)
+	err = u.DB.CreateForm8_1(res)
 	if err != nil {
 		return err
 	}
@@ -400,15 +396,15 @@ func (u *formService) CreateForm8_1(form domain.Form8_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm9(form domain.Form9Request) error {
+func (u *surveyService) CreateForm9(form domain.Form9Request) error {
 
 	res := []domain.Table9{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -426,7 +422,7 @@ func (u *formService) CreateForm9(form domain.Form9Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm9(res)
+	err = u.DB.CreateForm9(res)
 	if err != nil {
 		return err
 	}
@@ -434,15 +430,15 @@ func (u *formService) CreateForm9(form domain.Form9Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
+func (u *surveyService) CreateForm9_1(form domain.Form9_1Request) error {
 
 	res := []domain.Table9_1{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -463,7 +459,7 @@ func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm9_1(res)
+	err = u.DB.CreateForm9_1(res)
 	if err != nil {
 		return err
 	}
@@ -471,15 +467,15 @@ func (u *formService) CreateForm9_1(form domain.Form9_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm10(form domain.Form10Request) error {
+func (u *surveyService) CreateForm10(form domain.Form10Request) error {
 
 	res := []domain.Table10{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -495,7 +491,7 @@ func (u *formService) CreateForm10(form domain.Form10Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm10(res)
+	err = u.DB.CreateForm10(res)
 	if err != nil {
 		return err
 	}
@@ -503,15 +499,15 @@ func (u *formService) CreateForm10(form domain.Form10Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
+func (u *surveyService) CreateForm10_1(form domain.Form10_1Request) error {
 
 	res := []domain.Table10_1{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -527,7 +523,7 @@ func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm10_1(res)
+	err = u.DB.CreateForm10_1(res)
 	if err != nil {
 		return err
 	}
@@ -535,15 +531,15 @@ func (u *formService) CreateForm10_1(form domain.Form10_1Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm11(form domain.Form11Request) error {
+func (u *surveyService) CreateForm11(form domain.Form11Request) error {
 
 	res := []domain.Table11{}
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -560,7 +556,7 @@ func (u *formService) CreateForm11(form domain.Form11Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm11(res)
+	err = u.DB.CreateForm11(res)
 	if err != nil {
 		return err
 	}
@@ -568,14 +564,14 @@ func (u *formService) CreateForm11(form domain.Form11Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm1213(forms domain.Form1213Request) error {
+func (u *surveyService) CreateForm1213(forms domain.Form1213Request) error {
 
-	encuestador, err := u.DBUser.GetByEmail(forms.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(forms.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(forms.Zona)
+	zona, err := u.DB.FirstOrCreateZona(forms.Zona)
 	if err != nil {
 		return err
 	}
@@ -593,7 +589,7 @@ func (u *formService) CreateForm1213(forms domain.Form1213Request) error {
 	return nil
 }
 
-func (u *formService) CreateForm12(form domain.Form12, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm12(form domain.Form12, encuestador domain.User, zona domain.Zona) error {
 
 	res := domain.Table12{}
 
@@ -602,7 +598,7 @@ func (u *formService) CreateForm12(form domain.Form12, encuestador domain.User, 
 	res.HayProblema = form.HayProblema
 	res.QueProblema = form.QueProblema
 
-	err := u.DBForm.CreateForm12(res)
+	err := u.DB.CreateForm12(res)
 	if err != nil {
 		return err
 	}
@@ -610,7 +606,7 @@ func (u *formService) CreateForm12(form domain.Form12, encuestador domain.User, 
 	return nil
 }
 
-func (u *formService) CreateForm13(form domain.Form13, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm13(form domain.Form13, encuestador domain.User, zona domain.Zona) error {
 
 	res := domain.Table13{}
 
@@ -619,7 +615,7 @@ func (u *formService) CreateForm13(form domain.Form13, encuestador domain.User, 
 	res.HayContaminacion = form.HayContaminacion
 	res.CualEs = form.CualEs
 
-	err := u.DBForm.CreateForm13(res)
+	err := u.DB.CreateForm13(res)
 	if err != nil {
 		return err
 	}
@@ -627,16 +623,16 @@ func (u *formService) CreateForm13(form domain.Form13, encuestador domain.User, 
 	return nil
 }
 
-func (u *formService) CreateForm14(form domain.Form14Request) error {
+func (u *surveyService) CreateForm14(form domain.Form14Request) error {
 
 	res := []domain.Table14{}
 
-	encuestador, err := u.DBUser.GetByEmail(form.EncuestadorEmail)
+	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DBZona.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(form.Zona)
 	if err != nil {
 		return err
 	}
@@ -650,7 +646,7 @@ func (u *formService) CreateForm14(form domain.Form14Request) error {
 		})
 	}
 
-	err = u.DBForm.CreateForm14(res)
+	err = u.DB.CreateForm14(res)
 	if err != nil {
 		return err
 	}

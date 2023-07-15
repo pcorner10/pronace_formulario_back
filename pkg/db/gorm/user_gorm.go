@@ -2,21 +2,19 @@ package db
 
 import (
 	"pronaces_back/pkg/domain"
-
-	"gorm.io/gorm"
 )
 
-type UserGorm struct {
-	db *gorm.DB
+// TODO
+func (r *gormStore) LoginUser(email, password string) (*domain.ReponseLogin, error) {
+	return nil, nil
 }
 
-func NewUserGorm(db *gorm.DB) (*UserGorm, error) {
-	return &UserGorm{
-		db: db,
-	}, nil
+// TODO
+func (r *gormStore) RegisterUser(user *domain.User) error {
+	return nil
 }
 
-func (r *UserGorm) Create(user domain.User) error {
+func (r *gormStore) CreateUser(user domain.User) error {
 	// implementar la lógica de crear un usuario con GORM
 	err := r.db.Create(&user).Error
 	if err != nil {
@@ -26,7 +24,7 @@ func (r *UserGorm) Create(user domain.User) error {
 	return nil
 }
 
-func (r *UserGorm) GetByEmail(email string) (*domain.User, error) {
+func (r *gormStore) GetUserByEmail(email string) (*domain.User, error) {
 	// implementar la lógica de obtener un usuario por ID con GORM
 	user := &domain.User{}
 
@@ -38,7 +36,7 @@ func (r *UserGorm) GetByEmail(email string) (*domain.User, error) {
 	return user, nil
 }
 
-func (r *UserGorm) Update(user domain.User) error {
+func (r *gormStore) UpdateUser(user domain.User) error {
 	// implementar la lógica de actualizar un usuario con GORM
 	err := r.db.Save(user).Error
 	if err != nil {
@@ -48,7 +46,7 @@ func (r *UserGorm) Update(user domain.User) error {
 	return nil
 }
 
-func (r *UserGorm) Delete(userID uint64) error {
+func (r *gormStore) DeleteUser(userID uint64) error {
 	// implementar la lógica de eliminar un usuario con GORM
 	err := r.db.Delete(&domain.User{}, userID).Error
 	if err != nil {
