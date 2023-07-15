@@ -1,7 +1,7 @@
 package app
 
 import (
-	"pronaces_back/pkg/db"
+	"pronaces_back/pkg/db/gorm"
 	"pronaces_back/pkg/ihttp"
 
 	"gorm.io/gorm"

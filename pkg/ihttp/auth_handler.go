@@ -17,6 +17,10 @@ func NewAuthHandler(authService domain.AuthService) *AuthHandler {
 	}
 }
 
+func (h *AuthHandler) HelloWorld(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
+}
+
 func (h *AuthHandler) Login(ctx *gin.Context) {
 	// Leer datos del cuerpo de la petición
 	var credentials struct {

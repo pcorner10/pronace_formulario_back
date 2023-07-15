@@ -6,7 +6,7 @@ import (
 	"os"
 	"pronaces_back/config"
 	"pronaces_back/pkg/app"
-	"pronaces_back/pkg/db"
+	"pronaces_back/pkg/db/gorm"
 	"pronaces_back/pkg/ihttp"
 
 	"github.com/gin-contrib/cors"

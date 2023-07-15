@@ -10,13 +10,13 @@ import (
 
 var dbHandler *gorm.DB
 
-func Init() *gorm.DB {
+func NewGormStore() *gorm.DB {
 
 	var err error
 
 	// load config from config.yml
 
-	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s",
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:5432/%s",
 		os.Getenv("DB_USERNAME"),
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_HOST"),
