@@ -20,7 +20,7 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Fatal("Port is not set")
+		log.Print("Port is not set")
 		port = "8080"
 	}
 	log.Printf("listening on port %s", port)
@@ -45,10 +45,11 @@ func Start(port string) {
 
 	var dbHandler domain.FormDB
 	var err error
-	
+
 	if viper.GetBool("server.localenv") {
 		gin.SetMode(gin.DebugMode)
 		dbHandler, err = db.NewGormStore()
+
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}

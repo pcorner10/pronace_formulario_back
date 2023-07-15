@@ -27,6 +27,10 @@ func NewGormStore() (domain.FormDB, error) {
 		panic(err)
 	}
 
+	if viper.GetBool("database.migrate") {
+		Migrate(dbHandler)
+	}
+
 	sql, err := dbHandler.DB()
 	if err != nil {
 		panic(err)

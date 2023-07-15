@@ -12,3 +12,13 @@ browser:
 
 logs:
 	gcloud app logs tail -s default
+
+rundeply:
+	gcloud run deploy pronace_formulario_back \
+	--region=us-central1 \
+	--source=. \
+	--set-env-vars INSTANCE_CONNECTION_NAME="${GOOGLE_CLOUD_PROJECT}:us-central1:quickstart-instance" \
+	--set-env-vars DB_NAME="quickstart_db" \
+	--set-env-vars DB_USER="quickstart-service-account@${GOOGLE_CLOUD_PROJECT}.iam" \
+	--service-account="quickstart-service-account@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com" \
+	--allow-unauthenticated

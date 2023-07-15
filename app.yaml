@@ -6,3 +6,4 @@ env_variables:
   DB_PASSWORD: EfeL@Piedra99..
   DB_HOST: 35.223.146.187
   DB_PORT: 5432
+  PORT: 8080
