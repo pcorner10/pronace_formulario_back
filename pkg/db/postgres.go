@@ -2,8 +2,8 @@ package db
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,12 +16,11 @@ func Init() *gorm.DB {
 
 	// load config from config.yml
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",
-		viper.GetString("database.host"),
-		viper.GetString("database.user"),
-		viper.GetString("database.password"),
-		viper.GetString("database.dbname"),
-		viper.GetString("database.port"))
+	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s",
+		os.Getenv("DB_USERNAME"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_NAME"))
 
 	dbHandler, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

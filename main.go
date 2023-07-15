@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"pronaces_back/config"
 	"pronaces_back/pkg/app"
 	"pronaces_back/pkg/db"
@@ -22,13 +23,13 @@ func main() {
 		db.Migrate(dbHandler)
 	}
 
-	port := viper.GetString("server.port")
+	port := os.Getenv("PORT")
 
 	if port == "" {
 		log.Fatal("Port is not set")
 		port = "8080"
 	}
-
+	log.Printf("listening on port %s", port)
 	Start(port, dbHandler)
 }
 
@@ -49,9 +50,7 @@ func Start(port string, dbHandler *gorm.DB) {
 
 	authHandler := app.BindAuth(dbHandler)
 
-
 	formHandler := app.BindForm(dbHandler)
-
 
 	ihttp.SetupRoutes(r, authHandler, formHandler)
 
