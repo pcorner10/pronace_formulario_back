@@ -41,9 +41,14 @@ func NewGormStore() (domain.FormDB, error) {
 	return &gormStore{db: dbHandler}, nil
 }
 
-func (r *gormStore) CreateForm0(table0 []domain.Table0) error {
+func (r *gormStore) CreateForm0(req interface{}) error {
 
-	err := r.db.Create(&table0).Error
+	form, ok := req.([]domain.Table0)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table0")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -51,9 +56,19 @@ func (r *gormStore) CreateForm0(table0 []domain.Table0) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm1(table1 domain.Table1) error {
+// TODO
+func (r *gormStore) CreateForm123(req interface{}) error {
+	return nil
+}
 
-	err := r.db.Create(&table1).Error
+func (r *gormStore) CreateForm1(req interface{}) error {
+
+	form, ok := req.(domain.Table1)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table1")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -61,9 +76,14 @@ func (r *gormStore) CreateForm1(table1 domain.Table1) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm2(table2 domain.Table2) error {
+func (r *gormStore) CreateForm2(req interface{}) error {
 
-	err := r.db.Create(&table2).Error
+	form, ok := req.(domain.Table2)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table2")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -71,9 +91,14 @@ func (r *gormStore) CreateForm2(table2 domain.Table2) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm3(table3 domain.Table3) error {
+func (r *gormStore) CreateForm3(req interface{}) error {
 
-	err := r.db.Create(&table3).Error
+	form, ok := req.(domain.Table3)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table3")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -81,9 +106,14 @@ func (r *gormStore) CreateForm3(table3 domain.Table3) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm4(table4 []domain.Table4) error {
+func (r *gormStore) CreateForm4(req interface{}) error {
 
-	err := r.db.Create(&table4).Error
+	form, ok := req.([]domain.Table4)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table4")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -91,9 +121,14 @@ func (r *gormStore) CreateForm4(table4 []domain.Table4) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm5(table5 []domain.Table5) error {
+func (r *gormStore) CreateForm5(req interface{}) error {
 
-	err := r.db.Create(&table5).Error
+	form, ok := req.([]domain.Table5)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table5")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -101,9 +136,14 @@ func (r *gormStore) CreateForm5(table5 []domain.Table5) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm6(table6 []domain.Table6) error {
+func (r *gormStore) CreateForm6(req interface{}) error {
 
-	err := r.db.Create(&table6).Error
+	form, ok := req.([]domain.Table6)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table6")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -111,9 +151,14 @@ func (r *gormStore) CreateForm6(table6 []domain.Table6) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm7(table7 []domain.Table7) error {
+func (r *gormStore) CreateForm7(req interface{}) error {
 
-	err := r.db.Create(&table7).Error
+	form, ok := req.([]domain.Table7)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table7")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -121,9 +166,14 @@ func (r *gormStore) CreateForm7(table7 []domain.Table7) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm8(table8 []domain.Table8) error {
+func (r *gormStore) CreateForm8(req interface{}) error {
 
-	err := r.db.Create(&table8).Error
+	form, ok := req.([]domain.Table8)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table8")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -131,9 +181,14 @@ func (r *gormStore) CreateForm8(table8 []domain.Table8) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm8_1(table8_1 []domain.Table8_1) error {
+func (r *gormStore) CreateForm8_1(req interface{}) error {
 
-	err := r.db.Create(&table8_1).Error
+	form, ok := req.([]domain.Table8_1)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table8_1")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -141,9 +196,14 @@ func (r *gormStore) CreateForm8_1(table8_1 []domain.Table8_1) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm9(table9 []domain.Table9) error {
+func (r *gormStore) CreateForm9(req interface{}) error {
 
-	err := r.db.Create(&table9).Error
+	form, ok := req.([]domain.Table9)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table9")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -151,9 +211,14 @@ func (r *gormStore) CreateForm9(table9 []domain.Table9) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm9_1(table9_1 []domain.Table9_1) error {
+func (r *gormStore) CreateForm9_1(req interface{}) error {
 
-	err := r.db.Create(&table9_1).Error
+	form, ok := req.([]domain.Table9_1)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table9_1")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -161,9 +226,14 @@ func (r *gormStore) CreateForm9_1(table9_1 []domain.Table9_1) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm10(table10 []domain.Table10) error {
+func (r *gormStore) CreateForm10(req interface{}) error {
 
-	err := r.db.Create(&table10).Error
+	form, ok := req.([]domain.Table10)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table10")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -171,9 +241,14 @@ func (r *gormStore) CreateForm10(table10 []domain.Table10) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm10_1(table10_1 []domain.Table10_1) error {
+func (r *gormStore) CreateForm10_1(req interface{}) error {
 
-	err := r.db.Create(&table10_1).Error
+	form, ok := req.([]domain.Table10_1)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table10_1")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -181,9 +256,14 @@ func (r *gormStore) CreateForm10_1(table10_1 []domain.Table10_1) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm11(table11 []domain.Table11) error {
+func (r *gormStore) CreateForm11(req interface{}) error {
 
-	err := r.db.Create(&table11).Error
+	form, ok := req.([]domain.Table11)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table11")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -191,9 +271,19 @@ func (r *gormStore) CreateForm11(table11 []domain.Table11) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm12(table12 domain.Table12) error {
+// TODO
+func (r *gormStore) CreateForm1213(req interface{}) error {
+	return nil
+}
 
-	err := r.db.Create(&table12).Error
+func (r *gormStore) CreateForm12(req interface{}) error {
+
+	form, ok := req.(domain.Table12)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table12")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -201,9 +291,14 @@ func (r *gormStore) CreateForm12(table12 domain.Table12) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm13(table13 domain.Table13) error {
+func (r *gormStore) CreateForm13(req interface{}) error {
 
-	err := r.db.Create(&table13).Error
+	form, ok := req.(domain.Table13)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table13")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}
@@ -211,9 +306,14 @@ func (r *gormStore) CreateForm13(table13 domain.Table13) error {
 	return nil
 }
 
-func (r *gormStore) CreateForm14(table14 []domain.Table14) error {
+func (r *gormStore) CreateForm14(req interface{}) error {
 
-	err := r.db.Create(&table14).Error
+	form, ok := req.([]domain.Table14)
+	if !ok {
+		return fmt.Errorf("error casting to []domain.Table14")
+	}
+
+	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
 	}

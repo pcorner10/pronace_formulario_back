@@ -6,22 +6,16 @@ import (
 	"os"
 	"pronaces_back/config"
 	"pronaces_back/pkg/app"
-	"pronaces_back/pkg/db/gorm"
+	db "pronaces_back/pkg/db/gorm"
+	"pronaces_back/pkg/domain"
 	"pronaces_back/pkg/ihttp"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"gorm.io/gorm"
 )
 
 func main() {
-	config.Init()
-	dbHandler := db.Init()
-
-	if viper.GetBool("database.migrate") {
-		db.Migrate(dbHandler)
-	}
 
 	port := os.Getenv("PORT")
 
@@ -30,10 +24,11 @@ func main() {
 		port = "8080"
 	}
 	log.Printf("listening on port %s", port)
-	Start(port, dbHandler)
+	Start(port)
 }
 
-func Start(port string, dbHandler *gorm.DB) {
+func Start(port string) {
+	config.Init()
 	fmt.Println("Starting server at port " + port)
 
 	r := gin.Default()
@@ -48,11 +43,24 @@ func Start(port string, dbHandler *gorm.DB) {
 
 	r.Use(cors.New(config))
 
-	authHandler := app.BindAuth(dbHandler)
+	var dbHandler domain.FormDB
+	var err error
+	
+	if viper.GetBool("server.localenv") {
+		gin.SetMode(gin.DebugMode)
+		dbHandler, err = db.NewGormStore()
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
-	formHandler := app.BindForm(dbHandler)
+	if err != nil {
+		panic(err)
+	}
 
-	ihttp.SetupRoutes(r, authHandler, formHandler)
+	service := app.NewSurveyService(dbHandler)
+	handler := ihttp.NewHandler(service)
+
+	ihttp.SetupRoutes(r, handler)
 
 	r.Run(":" + port)
 }

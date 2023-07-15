@@ -16,21 +16,31 @@ func NewSurveyService(db domain.FormDB) domain.FormService {
 	}
 }
 
-func (u *surveyService) CreateForm0(req domain.Form0Request) error {
+func (u *surveyService) CreateForm0(req interface{}) error {
 
 	form := []domain.Table0{}
 
-	encuestador, err := u.DB.GetUserByEmail(req.EncuestadorEmail)
+	// Cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := req.(domain.Form0Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
+	if err != nil {
+		return err
+	}
+	encuestador, err = u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(req.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range req.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		edad, err := strconv.Atoi(integrante.Edad)
 		if err != nil {
@@ -73,28 +83,40 @@ func (u *surveyService) CreateForm0(req domain.Form0Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm123(forms domain.Form123Request) error {
-	encuestador, err := u.DB.GetUserByEmail(forms.EncuestadorEmail)
+func (u *surveyService) CreateForm123(forms interface{}) error {
+
+	formReq, ok := forms.(domain.Form123Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(forms.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	err = u.CreateForm1(forms.Form1, *encuestador, *zona)
+	formReq.Form1.EncuestadorID = encuestador.ID
+	formReq.Form1.ZonaID = zona.ID
+	err = u.CreateForm1(formReq.Form1)
 	if err != nil {
 		return err
 	}
 
-	err = u.CreateForm2(forms.Form2, *encuestador, *zona)
+	formReq.Form2.EncuestadorID = encuestador.ID
+	formReq.Form2.ZonaID = zona.ID
+	err = u.CreateForm2(formReq.Form2)
 	if err != nil {
 		return err
 	}
 
-	err = u.CreateForm3(forms.Form3, *encuestador, *zona)
+	formReq.Form3.EncuestadorID = encuestador.ID
+	formReq.Form3.ZonaID = zona.ID
+	err = u.CreateForm3(formReq.Form3)
 	if err != nil {
 		return err
 	}
@@ -102,26 +124,32 @@ func (u *surveyService) CreateForm123(forms domain.Form123Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm1(form domain.Form1, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm1(form interface{}) error {
 
 	res := domain.Table1{}
-	fmt.Println(form)
-	NumCuartos, err := strconv.Atoi(form.NumCuartos)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form1)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	NumCuartos, err := strconv.Atoi(formReq.NumCuartos)
 	if err != nil {
 		return err
 	}
 
-	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona.ID
-	res.TieneElectricidad = form.TieneElectricidad
-	res.FuentesAgua = form.FuentesAgua
-	res.TieneGas = form.TieneGas
-	res.EliminacionDesechos = form.EliminacionDesechos
-	res.MaterialParedes = form.MaterialParedes
-	res.MaterialPiso = form.MaterialPiso
-	res.MaterialTecho = form.MaterialTecho
+	res.EncuestadorID = formReq.EncuestadorID
+	res.ZonaID = formReq.ZonaID
+	res.TieneElectricidad = formReq.TieneElectricidad
+	res.FuentesAgua = formReq.FuentesAgua
+	res.TieneGas = formReq.TieneGas
+	res.EliminacionDesechos = formReq.EliminacionDesechos
+	res.MaterialParedes = formReq.MaterialParedes
+	res.MaterialPiso = formReq.MaterialPiso
+	res.MaterialTecho = formReq.MaterialTecho
 	res.NumCuartos = NumCuartos
-	res.OloresDesagradables = form.OloresDesagradables
+	res.OloresDesagradables = formReq.OloresDesagradables
 
 	err = u.DB.CreateForm1(res)
 	if err != nil {
@@ -131,15 +159,21 @@ func (u *surveyService) CreateForm1(form domain.Form1, encuestador domain.User, 
 	return nil
 }
 
-func (u *surveyService) CreateForm2(form domain.Form2, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm2(form interface{}) error {
 
 	res := domain.Table2{}
 
-	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona.ID
-	res.LlaveInterior = form.LlaveInterior
-	res.Garrafon = form.Garrafon
-	res.LlaveComunitaria = form.LlaveComunitaria
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form2)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	res.EncuestadorID = formReq.EncuestadorID
+	res.ZonaID = formReq.ZonaID
+	res.LlaveInterior = formReq.LlaveInterior
+	res.Garrafon = formReq.Garrafon
+	res.LlaveComunitaria = formReq.LlaveComunitaria
 
 	err := u.DB.CreateForm2(res)
 	if err != nil {
@@ -149,17 +183,23 @@ func (u *surveyService) CreateForm2(form domain.Form2, encuestador domain.User, 
 	return nil
 }
 
-func (u *surveyService) CreateForm3(form domain.Form3, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm3(form interface{}) error {
 
 	res := domain.Table3{}
 
-	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona.ID
-	res.Imss = form.Imss
-	res.Issste = form.Issste
-	res.SeguroPopular = form.SeguroPopular
-	res.Privado = form.Privado
-	res.Ninguno = form.Ninguno
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form3)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	res.EncuestadorID = formReq.EncuestadorID
+	res.ZonaID = formReq.ZonaID
+	res.Imss = formReq.Imss
+	res.Issste = formReq.Issste
+	res.SeguroPopular = formReq.SeguroPopular
+	res.Privado = formReq.Privado
+	res.Ninguno = formReq.Ninguno
 
 	err := u.DB.CreateForm3(res)
 	if err != nil {
@@ -169,20 +209,27 @@ func (u *surveyService) CreateForm3(form domain.Form3, encuestador domain.User, 
 	return nil
 }
 
-func (u *surveyService) CreateForm4(form domain.Form4Request) error {
+func (u *surveyService) CreateForm4(form interface{}) error {
 
 	res := []domain.Table4{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form4Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 		res = append(res, domain.Table4{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona.ID,
@@ -199,20 +246,27 @@ func (u *surveyService) CreateForm4(form domain.Form4Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm5(form domain.Form5Request) error {
+func (u *surveyService) CreateForm5(form interface{}) error {
 
 	res := []domain.Table5{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form5Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 		res = append(res, domain.Table5{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona.ID,
@@ -229,20 +283,27 @@ func (u *surveyService) CreateForm5(form domain.Form5Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm6(form domain.Form6Request) error {
+func (u *surveyService) CreateForm6(form interface{}) error {
 
 	res := []domain.Table6{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form6Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		EdadFallecimiento, err := strconv.Atoi(integrante.EdadFallecimiento)
 		if err != nil {
@@ -273,20 +334,27 @@ func (u *surveyService) CreateForm6(form domain.Form6Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm7(form domain.Form7Request) error {
+func (u *surveyService) CreateForm7(form interface{}) error {
 
 	res := []domain.Table7{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form7Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Form7 {
+	for _, integrante := range formReq.Form7 {
 
 		EdadDetection, err := strconv.Atoi(integrante.EdadDetection)
 		if err != nil {
@@ -319,20 +387,27 @@ func (u *surveyService) CreateForm7(form domain.Form7Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm8(form domain.Form8Request) error {
+func (u *surveyService) CreateForm8(form interface{}) error {
 
 	res := []domain.Table8{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form8Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Form8 {
+	for _, integrante := range formReq.Form8 {
 
 		AñoNacimientoPerdida, err := strconv.Atoi(integrante.AñoNacimientoPerdida)
 		if err != nil {
@@ -360,20 +435,27 @@ func (u *surveyService) CreateForm8(form domain.Form8Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm8_1(form domain.Form8_1Request) error {
+func (u *surveyService) CreateForm8_1(form interface{}) error {
 
 	res := []domain.Table8_1{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form8_1Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Form8_1 {
+	for _, integrante := range formReq.Form8_1 {
 
 		AñoPerdida, err := strconv.Atoi(integrante.AñoPerdida)
 		if err != nil {
@@ -396,20 +478,27 @@ func (u *surveyService) CreateForm8_1(form domain.Form8_1Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm9(form domain.Form9Request) error {
+func (u *surveyService) CreateForm9(form interface{}) error {
 
 	res := []domain.Table9{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form9Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
@@ -430,20 +519,27 @@ func (u *surveyService) CreateForm9(form domain.Form9Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm9_1(form domain.Form9_1Request) error {
+func (u *surveyService) CreateForm9_1(form interface{}) error {
 
 	res := []domain.Table9_1{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form9_1Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		año, err := strconv.Atoi(integrante.Año)
 		if err != nil {
@@ -467,20 +563,27 @@ func (u *surveyService) CreateForm9_1(form domain.Form9_1Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm10(form domain.Form10Request) error {
+func (u *surveyService) CreateForm10(form interface{}) error {
 
 	res := []domain.Table10{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form10Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		res = append(res, domain.Table10{
 			EncuestadorID:        encuestador.ID,
@@ -499,20 +602,27 @@ func (u *surveyService) CreateForm10(form domain.Form10Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm10_1(form domain.Form10_1Request) error {
+func (u *surveyService) CreateForm10_1(form interface{}) error {
 
 	res := []domain.Table10_1{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form10_1Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		res = append(res, domain.Table10_1{
 			EncuestadorID:    encuestador.ID,
@@ -531,20 +641,27 @@ func (u *surveyService) CreateForm10_1(form domain.Form10_1Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm11(form domain.Form11Request) error {
+func (u *surveyService) CreateForm11(form interface{}) error {
 
 	res := []domain.Table11{}
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form11Request)
+
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		res = append(res, domain.Table11{
 			EncuestadorID:  encuestador.ID,
@@ -564,24 +681,34 @@ func (u *surveyService) CreateForm11(form domain.Form11Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm1213(forms domain.Form1213Request) error {
+func (u *surveyService) CreateForm1213(forms interface{}) error {
 
-	encuestador, err := u.DB.GetUserByEmail(forms.EncuestadorEmail)
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := forms.(domain.Form1213Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(forms.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	err = u.CreateForm12(forms.Form12, *encuestador, *zona)
+	formReq.Form12.EncuestadorID = encuestador.ID
+	formReq.Form12.ZonaID = zona.ID
+	err = u.CreateForm12(formReq.Form12)
 	if err != nil {
 		return err
 	}
 
-	err = u.CreateForm13(forms.Form13, *encuestador, *zona)
+	formReq.Form13.EncuestadorID = encuestador.ID
+	formReq.Form13.ZonaID = zona.ID
+	err = u.CreateForm13(formReq.Form13)
 	if err != nil {
 		return err
 	}
@@ -589,14 +716,20 @@ func (u *surveyService) CreateForm1213(forms domain.Form1213Request) error {
 	return nil
 }
 
-func (u *surveyService) CreateForm12(form domain.Form12, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm12(form interface{}) error {
 
 	res := domain.Table12{}
 
-	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona.ID
-	res.HayProblema = form.HayProblema
-	res.QueProblema = form.QueProblema
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form12)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	res.EncuestadorID = formReq.EncuestadorID
+	res.ZonaID = formReq.ZonaID
+	res.HayProblema = formReq.HayProblema
+	res.QueProblema = formReq.QueProblema
 
 	err := u.DB.CreateForm12(res)
 	if err != nil {
@@ -606,14 +739,20 @@ func (u *surveyService) CreateForm12(form domain.Form12, encuestador domain.User
 	return nil
 }
 
-func (u *surveyService) CreateForm13(form domain.Form13, encuestador domain.User, zona domain.Zona) error {
+func (u *surveyService) CreateForm13(form interface{}) error {
 
 	res := domain.Table13{}
 
-	res.EncuestadorID = encuestador.ID
-	res.ZonaID = zona.ID
-	res.HayContaminacion = form.HayContaminacion
-	res.CualEs = form.CualEs
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form13)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	res.EncuestadorID = formReq.EncuestadorID
+	res.ZonaID = formReq.ZonaID
+	res.HayContaminacion = formReq.HayContaminacion
+	res.CualEs = formReq.CualEs
 
 	err := u.DB.CreateForm13(res)
 	if err != nil {
@@ -623,21 +762,27 @@ func (u *surveyService) CreateForm13(form domain.Form13, encuestador domain.User
 	return nil
 }
 
-func (u *surveyService) CreateForm14(form domain.Form14Request) error {
+func (u *surveyService) CreateForm14(form interface{}) error {
 
 	res := []domain.Table14{}
 
-	encuestador, err := u.DB.GetUserByEmail(form.EncuestadorEmail)
+	// cast the req interface to the type that has the EncuestadorEmail field
+	formReq, ok := form.(domain.Form14Request)
+	if !ok {
+		return fmt.Errorf("invalid request type")
+	}
+
+	encuestador, err := u.DB.GetUserByEmail(formReq.EncuestadorEmail)
 	if err != nil {
 		return err
 	}
 
-	zona, err := u.DB.FirstOrCreateZona(form.Zona)
+	zona, err := u.DB.FirstOrCreateZona(formReq.Zona)
 	if err != nil {
 		return err
 	}
 
-	for _, integrante := range form.Integrante {
+	for _, integrante := range formReq.Integrante {
 
 		res = append(res, domain.Table14{
 			EncuestadorID: encuestador.ID,

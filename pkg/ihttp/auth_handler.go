@@ -7,21 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type AuthHandler struct {
-	authService domain.AuthService
-}
 
-func NewAuthHandler(authService domain.AuthService) *AuthHandler {
-	return &AuthHandler{
-		authService: authService,
-	}
-}
-
-func (h *AuthHandler) HelloWorld(ctx *gin.Context) {
+func (h *Handler) HelloWorld(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
 }
 
-func (h *AuthHandler) Login(ctx *gin.Context) {
+func (h *Handler) Login(ctx *gin.Context) {
 	// Leer datos del cuerpo de la petición
 	var credentials struct {
 		Email    string `json:"email"`
@@ -35,7 +26,7 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 	}
 
 	// Autenticar usuario
-	res, err := h.authService.Login(credentials.Email, credentials.Password)
+	res, err := h.service.LoginUser(credentials.Email, credentials.Password)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "authentication failed"})
 		return
@@ -45,7 +36,7 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"res": res})
 }
 
-func (h *AuthHandler) Register(ctx *gin.Context) {
+func (h *Handler) Register(ctx *gin.Context) {
 	// Leer datos del cuerpo de la petición
 	var credentials = &domain.User{}
 
@@ -56,7 +47,7 @@ func (h *AuthHandler) Register(ctx *gin.Context) {
 	}
 
 	// Registrar usuario
-	err = h.authService.Register(credentials)
+	err = h.service.RegisterUser(credentials)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
