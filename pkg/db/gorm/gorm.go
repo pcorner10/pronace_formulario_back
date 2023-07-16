@@ -32,6 +32,9 @@ func NewGormStore() (domain.FormDB, error) {
 	fmt.Println(dsn)
 
 	conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	if err != nil {
+		return nil, err
+	}
 
 	dbHandler, err := gorm.Open(postgres.New(postgres.Config{
 		Conn: conn,
