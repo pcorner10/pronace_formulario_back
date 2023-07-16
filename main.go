@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"pronaces_back/config"
 	"pronaces_back/pkg/app"
 	db "pronaces_back/pkg/db/gorm"
 	"pronaces_back/pkg/domain"
@@ -27,7 +26,7 @@ func main() {
 }
 
 func Start(port string) {
-	config.Init()
+	//config.Init()
 	fmt.Println("Starting server at port " + port)
 
 	r := gin.Default()
