@@ -12,7 +12,6 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
 func main() {
@@ -46,7 +45,7 @@ func Start(port string) {
 	var dbHandler domain.FormDB
 	var err error
 
-	if viper.GetBool("server.localenv") {
+	if os.Getenv("env") == "heroku" {
 		gin.SetMode(gin.DebugMode)
 		dbHandler, err = db.NewGormStore()
 	} else {
