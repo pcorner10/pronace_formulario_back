@@ -1,1 +1,1 @@
-web: pronaces_back
+web: ./pronaces_back
