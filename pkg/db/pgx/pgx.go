@@ -1,34 +1,78 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
+	"net"
 	"os"
 	"pronaces_back/pkg/domain"
 
 	"cloud.google.com/go/cloudsqlconn"
 	"cloud.google.com/go/cloudsqlconn/postgres/pgxv4"
+	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v4/stdlib"
+	migrate "github.com/rubenv/sql-migrate"
 )
 
 type psxStore struct {
-	db      *sql.DB
-	cleanup func() error
+	db *sql.DB
 }
 
 func NewPsxStore() (domain.FormDB, error) {
-	cleanup, err := pgxv4.RegisterDriver("cloudsql-postgres", cloudsqlconn.WithIAMAuthN())
+
+	dbUser := os.Getenv("DB_USER")                                  // e.g. 'my-db-user'
+	dbPwd := os.Getenv("DB_PASS")                                   // e.g. 'my-db-password'
+	dbName := os.Getenv("DB_NAME")                                  // e.g. 'my-database'
+	instanceConnectionName := os.Getenv("INSTANCE_CONNECTION_NAME") // e.g. 'project:region:instance'
+	usePrivate := os.Getenv("PRIVATE_IP")
+
+	dsn := fmt.Sprintf("user=%s password=%s database=%s sslmode=disable",
+		dbUser,
+		dbPwd,
+		dbName,
+	)
+
+	config, err := pgx.ParseConfig(dsn)
 	if err != nil {
-		log.Fatalf("Error on pgxv4.RegisterDriver: %v", err)
+		return nil, err
 	}
 
-	dsn := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable", os.Getenv("INSTANCE_CONNECTION_NAME"), os.Getenv("DB_USER"), os.Getenv("DB_NAME"))
-	db, err := sql.Open("cloudsql-postgres", dsn)
+	var opts []cloudsqlconn.Option
+	if usePrivate != "" {
+		opts = append(opts, cloudsqlconn.WithDefaultDialOptions(cloudsqlconn.WithPrivateIP()))
+	}
+
+	d, err := cloudsqlconn.NewDialer(context.Background(), opts...)
+	if err != nil {
+		return nil, err
+	}
+
+	config.DialFunc = func(ctx context.Context, network, instance string) (net.Conn, error) {
+		return d.Dial(ctx, instanceConnectionName)
+	}
+
+	dbURI := stdlib.RegisterConnConfig(config)
+
+	db, err := sql.Open("pgx", dbURI)
 	if err != nil {
 		log.Fatalf("Error on sql.Open: %v", err)
 	}
 
 	fmt.Println("Successfully connected to database!")
-	return &psxStore{db: db, cleanup: cleanup}, nil
+	return &psxStore{db: db}, nil
 }
 
+func migrateDB(db *sql.DB) error {
+	migrations := &migrate.FileMigrationSource{
+		Dir: "migrations", // Carpeta donde están las migraciones SQL
+	}
+
+	_, err := migrate.Exec(db, "postgres", migrations, migrate.Up)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
