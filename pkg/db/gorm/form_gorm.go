@@ -3,47 +3,7 @@ package db
 import (
 	"fmt"
 	"pronaces_back/pkg/domain"
-
-	"github.com/spf13/viper"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 )
-
-type gormStore struct {
-	db *gorm.DB
-}
-
-func NewGormStore() (domain.FormDB, error) {
-
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",
-		viper.GetString("database.host"),
-		viper.GetString("database.user"),
-		viper.GetString("database.password"),
-		viper.GetString("database.dbname"),
-		viper.GetString("database.port"))
-
-	dbHandler, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-
-	if viper.GetBool("database.migrate") {
-		Migrate(dbHandler)
-	}
-
-	sql, err := dbHandler.DB()
-	if err != nil {
-		panic(err)
-	}
-
-	sql.SetMaxIdleConns(10)
-	sql.SetMaxOpenConns(100)
-	sql.SetConnMaxIdleTime(30)
-	sql.SetConnMaxLifetime(60)
-
-	fmt.Println("Successfully connected to database!")
-	return &gormStore{db: dbHandler}, nil
-}
 
 func (r *gormStore) CreateForm0(req interface{}) error {
 
