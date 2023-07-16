@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"pronaces_back/pkg/domain"
 
@@ -28,7 +29,7 @@ func NewGormStore() (domain.FormDB, error) {
 		dbName,
 	)
 
-	fmt.Println(dsn)
+	log.Println(dsn)
 
 	//conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	//if err != nil {
@@ -37,6 +38,7 @@ func NewGormStore() (domain.FormDB, error) {
 
 	dbHandler, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{})
 	if err != nil {
+		log.Fatal(err)
 		panic(err)
 	}
 
