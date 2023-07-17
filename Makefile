@@ -1,5 +1,5 @@
 run:
-	go run cmd/main.go
+	set env=heroku && set DATABASE_URL="postgresql://postgres:root@localhost/pronaces?statusColor=&env=local&name=pronaces" && go run main.go
 
 # Deploy to Google Cloud Run
 # Path: Makefile

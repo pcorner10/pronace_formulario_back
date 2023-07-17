@@ -27,7 +27,7 @@ func (u *surveyService) LoginUser(email, password string) (*domain.ReponseLogin,
 
 	ReponseLogin := domain.ReponseLogin{
 		Token:    token,
-		UserName: user.Email,
+		Email: user.Email,
 		Role:     user.Role,
 		Id:       user.ID,
 	}

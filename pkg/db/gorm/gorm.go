@@ -16,26 +16,6 @@ type gormStore struct {
 
 func NewGormStore() (domain.FormDB, error) {
 
-	dbUser := os.Getenv("DB_USER")                                  // e.g. 'my-db-user'
-	dbPwd := os.Getenv("DB_PASS")                                   // e.g. 'my-db-password'
-	dbName := os.Getenv("DB_NAME")                                  // e.g. 'my-database'
-	instanceConnectionName := os.Getenv("INSTANCE_CONNECTION_NAME") // e.g. 'project:region:instance'
-	//usePrivate := os.Getenv("PRIVATE_IP")
-
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable TimeZone=America/Mexico_City",
-		instanceConnectionName,
-		dbUser,
-		dbPwd,
-		dbName,
-	)
-
-	log.Println(dsn)
-
-	//conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
-	//if err != nil {
-	//	return nil, err
-	//}
-
 	dbHandler, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
