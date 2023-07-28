@@ -18,7 +18,7 @@ func main() {
 
 	if port == "" {
 		log.Print("Port is not set")
-		port = "8080"
+		port = "4000"
 	}
 	log.Printf("listening on port %s", port)
 	Start(port)
@@ -43,12 +43,7 @@ func Start(port string) {
 	var dbHandler domain.FormDB
 	var err error
 
-	if os.Getenv("env") == "heroku" {
-		gin.SetMode(gin.DebugMode)
-		dbHandler, err = db.NewGormStore()
-	} else {
-		gin.SetMode(gin.ReleaseMode)
-	}
+	dbHandler, err = db.NewGormStore()
 
 	if err != nil {
 		panic(err)
