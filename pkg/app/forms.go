@@ -195,11 +195,7 @@ func (u *surveyService) CreateForm3(form interface{}) error {
 
 	res.EncuestadorID = formReq.EncuestadorID
 	res.ZonaID = formReq.ZonaID
-	res.Imss = formReq.Imss
-	res.Issste = formReq.Issste
-	res.SeguroPopular = formReq.SeguroPopular
-	res.Privado = formReq.Privado
-	res.Ninguno = formReq.Ninguno
+	res.Salud = formReq.Salud
 
 	err := u.DB.CreateForm3(res)
 	if err != nil {

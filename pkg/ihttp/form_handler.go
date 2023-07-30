@@ -45,7 +45,7 @@ func (h *Handler) CretateForm123(ctx *gin.Context) {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-
+	fmt.Println(res)
 	err = h.service.CreateForm123(*res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})

@@ -70,21 +70,17 @@ type Form1 struct {
 }
 
 type Form2 struct {
-	EncuestadorID       uint      `json:"encuestador_id"`
-	ZonaID              uint      `json:"zona_id"`
+	EncuestadorID    uint   `json:"encuestador_id"`
+	ZonaID           uint   `json:"zona_id"`
 	LlaveInterior    string `json:"llave_interior"`
 	Garrafon         string `json:"garrafon"`
 	LlaveComunitaria string `json:"llave_comunitaria"`
 }
 
 type Form3 struct {
-	EncuestadorID       uint      `json:"encuestador_id"`
-	ZonaID              uint      `json:"zona_id"`
-	Imss          string `json:"imss"`
-	Issste        string `json:"issste"`
-	SeguroPopular string `json:"seguro_popular"`
-	Privado       string `json:"privado"`
-	Ninguno       string `json:"ninguno"`
+	EncuestadorID uint   `json:"encuestador_id"`
+	ZonaID        uint   `json:"zona_id"`
+	Salud         []string `json:"salud"`
 }
 
 type Form123Request struct {
@@ -235,15 +231,15 @@ type Form11Request struct {
 }
 
 type Form12 struct {
-	EncuestadorID       uint   `json:"encuestador_id"`
-	ZonaID              uint   `json:"zona_id"`
-	HayProblema string `json:"hay_problema"`
-	QueProblema string `json:"que_problema"`
+	EncuestadorID uint   `json:"encuestador_id"`
+	ZonaID        uint   `json:"zona_id"`
+	HayProblema   string `json:"hay_problema"`
+	QueProblema   string `json:"que_problema"`
 }
 
 type Form13 struct {
-	EncuestadorID       uint   `json:"encuestador_id"`
-	ZonaID              uint   `json:"zona_id"`
+	EncuestadorID    uint   `json:"encuestador_id"`
+	ZonaID           uint   `json:"zona_id"`
 	HayContaminacion string `json:"hay_contaminacion"`
 	CualEs           string `json:"cual_es"`
 }

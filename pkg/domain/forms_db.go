@@ -2,6 +2,8 @@ package domain
 
 import (
 	"time"
+
+	"github.com/lib/pq"
 )
 
 type FormDB interface {
@@ -100,16 +102,17 @@ type Table2 struct {
 }
 
 type Table3 struct {
-	ID            uint      `json:"id" gorm:"primaryKey"`
-	EncuestadorID uint      `json:"encuestador_id"`
-	ZonaID        uint      `json:"zona_id"`
-	Imss          string    `json:"imss"`
-	Issste        string    `json:"issste"`
-	SeguroPopular string    `json:"seguro_popular"`
-	Privado       string    `json:"privado"`
-	Ninguno       string    `json:"ninguno"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at"`
+	ID            uint           `json:"id" gorm:"primaryKey"`
+	EncuestadorID uint           `json:"encuestador_id"`
+	ZonaID        uint           `json:"zona_id"`
+	Imss          string         `json:"imss"`
+	Issste        string         `json:"issste"`
+	SeguroPopular string         `json:"seguro_popular"`
+	Privado       string         `json:"privado"`
+	Ninguno       string         `json:"ninguno"`
+	Salud         pq.StringArray `gorm:"type:text[]" json:"salud"`
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
 }
 
 type Table4 struct {
