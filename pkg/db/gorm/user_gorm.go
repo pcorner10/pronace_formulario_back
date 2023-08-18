@@ -1,7 +1,6 @@
 package db
 
 import (
-	"fmt"
 	"pronaces_back/pkg/domain"
 )
 
@@ -27,7 +26,7 @@ func (r *gormStore) CreateUser(user domain.User) error {
 
 func (r *gormStore) GetUserByEmail(email string) (*domain.User, error) {
 	// implementar la lógica de obtener un usuario por ID con GORM
-	fmt.Println("Estamos en GetUserByEmail de db")
+
 	user := domain.User{}
 
 	err := r.db.Where("email = ?", email).First(&user).Error

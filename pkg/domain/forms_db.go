@@ -119,6 +119,7 @@ type Table4 struct {
 	ID                 uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID      uint      `json:"encuestador_id"`
 	ZonaID             uint      `json:"zona_id"`
+	Parentesco         string    `json:"parentesco"`
 	EnfermedadReferida string    `json:"enfermedad_referida"`
 	EnfermedadRecabada string    `json:"enfermedad_recabada"`
 	CreatedAt          time.Time `json:"created_at"`

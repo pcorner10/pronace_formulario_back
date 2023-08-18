@@ -59,6 +59,7 @@ func (h *Handler) CretateForm4(ctx *gin.Context) {
 	res := &domain.Form4Request{}
 
 	err := ctx.BindJSON(&res)
+	fmt.Println("resssss", res)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return

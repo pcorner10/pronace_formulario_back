@@ -229,6 +229,7 @@ func (u *surveyService) CreateForm4(form interface{}) error {
 		res = append(res, domain.Table4{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona.ID,
+			Parentesco:         integrante.Parentesco,
 			EnfermedadReferida: integrante.EnfermedadReferida,
 			EnfermedadRecabada: integrante.EnfermedadRecabada,
 		})
@@ -354,7 +355,7 @@ func (u *surveyService) CreateForm7(form interface{}) error {
 
 		EdadDetection, err := strconv.Atoi(integrante.EdadDetection)
 		if err != nil {
-			
+
 			return fmt.Errorf("error al convertir edad de deteccion: %v", err)
 		}
 

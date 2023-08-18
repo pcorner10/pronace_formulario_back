@@ -78,8 +78,8 @@ type Form2 struct {
 }
 
 type Form3 struct {
-	EncuestadorID uint   `json:"encuestador_id"`
-	ZonaID        uint   `json:"zona_id"`
+	EncuestadorID uint     `json:"encuestador_id"`
+	ZonaID        uint     `json:"zona_id"`
 	Salud         []string `json:"salud"`
 }
 
@@ -92,6 +92,7 @@ type Form123Request struct {
 }
 
 type Form4 struct {
+	Parentesco         string `json:"parentesco"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
