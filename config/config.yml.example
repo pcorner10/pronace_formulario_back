@@ -4,7 +4,8 @@ database:
   port: 5432
   password: root
   dbname: pronaces
-  migrate: true
-
+  MIGRATE: true
+  DATABASE_URL: postgres://postgres:root@localhost:5432/pronaces?sslmode=disable
+  
 server:
   port: 8080

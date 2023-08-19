@@ -70,21 +70,17 @@ type Form1 struct {
 }
 
 type Form2 struct {
-	EncuestadorID       uint      `json:"encuestador_id"`
-	ZonaID              uint      `json:"zona_id"`
+	EncuestadorID    uint   `json:"encuestador_id"`
+	ZonaID           uint   `json:"zona_id"`
 	LlaveInterior    string `json:"llave_interior"`
 	Garrafon         string `json:"garrafon"`
 	LlaveComunitaria string `json:"llave_comunitaria"`
 }
 
 type Form3 struct {
-	EncuestadorID       uint      `json:"encuestador_id"`
-	ZonaID              uint      `json:"zona_id"`
-	Imss          string `json:"imss"`
-	Issste        string `json:"issste"`
-	SeguroPopular string `json:"seguro_popular"`
-	Privado       string `json:"privado"`
-	Ninguno       string `json:"ninguno"`
+	EncuestadorID uint     `json:"encuestador_id"`
+	ZonaID        uint     `json:"zona_id"`
+	Salud         []string `json:"salud"`
 }
 
 type Form123Request struct {
@@ -96,6 +92,7 @@ type Form123Request struct {
 }
 
 type Form4 struct {
+	Parentesco         string `json:"parentesco"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
@@ -107,6 +104,7 @@ type Form4Request struct {
 }
 
 type Form5 struct {
+	Parentesco         string `json:"parentesco"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
@@ -118,6 +116,7 @@ type Form5Request struct {
 }
 
 type Form6 struct {
+	Parentesco        string `json:"parentesco"`
 	Sexo              string `json:"sexo"`
 	EdadFallecimiento string `json:"edad_fallecimiento"`
 	AñoFallecimiento  string `json:"año_fallecimiento"`
@@ -133,6 +132,7 @@ type Form6Request struct {
 
 type Form7 struct {
 	Sexo          string `json:"sexo"`
+	Parentesco    string `json:"parentesco"`
 	EdadDetection string `json:"edad_deteccion"`
 	AñoDetection  string `json:"año_deteccion"`
 	TipoReferido  string `json:"tipo_referida"`
@@ -142,14 +142,15 @@ type Form7 struct {
 type Form7Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
-	Form7            []Form7 `json:"form7"`
+	Form7            []Form7 `json:"integrante"`
 }
 
 type Form8 struct {
 	AñoNacimientoPerdida string `json:"año_nacimiento_perdida"`
 	EnCurso              string `json:"en_curso"`
 	TipoParto            string `json:"tipo_parto"`
-	TuvoComplicaciones   string `json:"tuvo_complicaciones"`
+	Parentesco           string `json:"parentesco"`
+	TuvoComplicaciones   string `json:"tuvo_complicacion"`
 	ComplicacionReferida string `json:"complicacion_referida"`
 	ComplicacionRecabada string `json:"complicacion_recabada"`
 }
@@ -157,10 +158,11 @@ type Form8 struct {
 type Form8Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
-	Form8            []Form8 `json:"form8"`
+	Form8            []Form8 `json:"integrante"`
 }
 
 type Form8_1 struct {
+	Parentesco string `json:"parentesco"`
 	AñoPerdida string `json:"año_perdida"`
 	Trimestre  string `json:"trimestre"`
 }
@@ -168,13 +170,14 @@ type Form8_1 struct {
 type Form8_1Request struct {
 	EncuestadorEmail string    `json:"email"`
 	Zona             Zona      `json:"zona"`
-	Form8_1          []Form8_1 `json:"form8_1"`
+	Form8_1          []Form8_1 `json:"integrante"`
 }
 
 type Form9 struct {
-	BajoPeso             bool   `json:"bajo_peso"`
-	Prematuro            bool   `json:"prematuro"`
-	Malformacion         bool   `json:"malformacion"`
+	Parentesco           string `json:"parentesco"`
+	BajoPeso             string `json:"bajo_peso"`
+	Prematuro            string `json:"prematuro"`
+	Malformacion         string `json:"malformacion"`
 	MalformacionReferida string `json:"malformacion_referida"`
 	MalformacionRecabada string `json:"malformacion_recabada"`
 }
@@ -186,6 +189,7 @@ type Form9Request struct {
 }
 
 type Form9_1 struct {
+	Parentesco       string `json:"parentesco"`
 	Año              string `json:"año"`
 	ProblemaReferido string `json:"problema_referido"`
 	ProblemaRecabado string `json:"problema_recabado"`
@@ -198,6 +202,7 @@ type Form9_1Request struct {
 }
 
 type Form10 struct {
+	Parentesco           string `json:"parentesco"`
 	DiscapacidadReferida string `json:"discapacidad_referida"`
 	DiscapacidadRecabada string `json:"discapacidad_recabada"`
 	TipoCondicion        string `json:"tipo_condicion"`
@@ -210,6 +215,7 @@ type Form10Request struct {
 }
 
 type Form10_1 struct {
+	Parentesco       string `json:"parentesco"`
 	SiDonde          string `json:"si_donde"`
 	NoPorque         string `json:"no_porque"`
 	TieneCertificado string `json:"tiene_certificado"`
@@ -222,6 +228,7 @@ type Form10_1Request struct {
 }
 
 type Form11 struct {
+	Parentesco     string `json:"parentesco"`
 	NombreFarmaco  string `json:"nombre_farmaco"`
 	EsPrescrito    string `json:"es_prescrito"`
 	MotivoReferido string `json:"motivo_referido"`
@@ -235,15 +242,15 @@ type Form11Request struct {
 }
 
 type Form12 struct {
-	EncuestadorID       uint   `json:"encuestador_id"`
-	ZonaID              uint   `json:"zona_id"`
-	HayProblema string `json:"hay_problema"`
-	QueProblema string `json:"que_problema"`
+	EncuestadorID uint   `json:"encuestador_id"`
+	ZonaID        uint   `json:"zona_id"`
+	HayProblema   string `json:"hay_problema"`
+	QueProblema   string `json:"que_problema"`
 }
 
 type Form13 struct {
-	EncuestadorID       uint   `json:"encuestador_id"`
-	ZonaID              uint   `json:"zona_id"`
+	EncuestadorID    uint   `json:"encuestador_id"`
+	ZonaID           uint   `json:"zona_id"`
 	HayContaminacion string `json:"hay_contaminacion"`
 	CualEs           string `json:"cual_es"`
 }
@@ -256,7 +263,8 @@ type Form1213Request struct {
 }
 
 type Form14 struct {
-	Tiempo string `json:"tiempo"`
+	Parentesco string `json:"parentesco"`
+	Tiempo     string `json:"tiempo"`
 }
 
 type Form14Request struct {

@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/jackc/pgx/v4 v4.18.1
+	github.com/lib/pq v1.10.9
 	github.com/rubenv/sql-migrate v1.5.1
 	github.com/spf13/viper v1.15.0
 	github.com/stretchr/testify v1.8.4
