@@ -129,6 +129,7 @@ type Table4 struct {
 type Table5 struct {
 	ID                 uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID      uint      `json:"encuestador_id"`
+	Parentesco         string    `json:"parentesco"`
 	ZonaID             uint      `json:"zona_id"`
 	EnfermedadReferida string    `json:"enfermedad_referida"`
 	EnfermedadRecabada string    `json:"enfermedad_recabada"`
@@ -140,6 +141,7 @@ type Table6 struct {
 	ID                uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID     uint      `json:"encuestador_id"`
 	ZonaID            uint      `json:"zona_id"`
+	Parentesco        string    `json:"parentesco"`
 	Sexo              string    `json:"sexo"`
 	EdadFallecimiento int       `json:"edad_fallecimiento"`
 	AñoFallecimiento  int       `json:"año_fallecimiento"`
@@ -153,6 +155,7 @@ type Table7 struct {
 	ID            uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID uint      `json:"encuestador_id"`
 	ZonaID        uint      `json:"zona_id"`
+	Parentesco    string    `json:"parentesco"`
 	Sexo          string    `json:"sexo"`
 	EdadDetection int       `json:"edad_detection"`
 	AñoDetection  int       `json:"año_detection"`
@@ -166,6 +169,7 @@ type Table8 struct {
 	ID                   uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID        uint      `json:"encuestador_id"`
 	ZonaID               uint      `json:"zona_id"`
+	Parentesco           string    `json:"parentesco"`
 	AñoNacimientoPerdida int       `json:"año_nacimiento_perdida"`
 	EnCurso              string    `json:"en_curso"`
 	TipoParto            string    `json:"tipo_parto"`
@@ -180,6 +184,7 @@ type Table8_1 struct {
 	ID            uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID uint      `json:"encuestador_id"`
 	ZonaID        uint      `json:"zona_id"`
+	Parentesco    string    `json:"parentesco"`
 	AñoPerdida    int       `json:"año_perdida"`
 	Trimestre     string    `json:"trimestre"`
 	CreatedAt     time.Time `json:"created_at"`
@@ -190,6 +195,7 @@ type Table9 struct {
 	ID                   uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID        uint      `json:"encuestador_id"`
 	ZonaID               uint      `json:"zona_id"`
+	Parentesco           string    `json:"parentesco"`
 	BajoPeso             bool      `json:"bajo_peso"`
 	Prematuro            bool      `json:"prematuro"`
 	Malformacion         bool      `json:"malformacion"`
@@ -203,6 +209,7 @@ type Table9_1 struct {
 	ID               uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID    uint      `json:"encuestador_id"`
 	ZonaID           uint      `json:"zona_id"`
+	Parentesco       string    `json:"parentesco"`
 	Año              int       `json:"año"`
 	ProblemaReferido string    `json:"problema_referido"`
 	ProblemaRecabado string    `json:"problema_recabado"`
@@ -214,6 +221,7 @@ type Table10 struct {
 	ID                   uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID        uint      `json:"encuestador_id"`
 	ZonaID               uint      `json:"zona_id"`
+	Parentesco           string    `json:"parentesco"`
 	DiscapacidadReferida string    `json:"discapacidad_referida"`
 	DiscapacidadRecabada string    `json:"discapacidad_recabada"`
 	TipoCondicion        string    `json:"tipo_condicion"`
@@ -225,6 +233,7 @@ type Table10_1 struct {
 	ID               uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID    uint      `json:"encuestador_id"`
 	ZonaID           uint      `json:"zona_id"`
+	Parentesco       string    `json:"parentesco"`
 	SiDonde          string    `json:"si_donde"`
 	NoPorque         string    `json:"no_porque"`
 	TieneCertificado string    `json:"tiene_certificado"`
@@ -236,6 +245,7 @@ type Table11 struct {
 	ID             uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID  uint      `json:"encuestador_id"`
 	ZonaID         uint      `json:"zona_id"`
+	Parentesco     string    `json:"parentesco"`
 	NombreFarmaco  string    `json:"nombre_farmaco"`
 	EsPrescrito    string    `json:"es_prescrito"`
 	MotivoReferido string    `json:"motivo_referido"`
@@ -268,6 +278,7 @@ type Table14 struct {
 	ID            uint      `json:"id" gorm:"primaryKey"`
 	EncuestadorID uint      `json:"encuestador_id"`
 	ZonaID        uint      `json:"zona_id"`
+	Parentesco    string    `json:"parentesco"`
 	Tiempo        string    `json:"tiempo"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`

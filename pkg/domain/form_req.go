@@ -104,6 +104,7 @@ type Form4Request struct {
 }
 
 type Form5 struct {
+	Parentesco         string `json:"parentesco"`
 	EnfermedadReferida string `json:"enfermedad_referida"`
 	EnfermedadRecabada string `json:"enfermedad_recabada"`
 }
@@ -115,6 +116,7 @@ type Form5Request struct {
 }
 
 type Form6 struct {
+	Parentesco        string `json:"parentesco"`
 	Sexo              string `json:"sexo"`
 	EdadFallecimiento string `json:"edad_fallecimiento"`
 	AñoFallecimiento  string `json:"año_fallecimiento"`
@@ -130,6 +132,7 @@ type Form6Request struct {
 
 type Form7 struct {
 	Sexo          string `json:"sexo"`
+	Parentesco    string `json:"parentesco"`
 	EdadDetection string `json:"edad_deteccion"`
 	AñoDetection  string `json:"año_deteccion"`
 	TipoReferido  string `json:"tipo_referida"`
@@ -146,6 +149,7 @@ type Form8 struct {
 	AñoNacimientoPerdida string `json:"año_nacimiento_perdida"`
 	EnCurso              string `json:"en_curso"`
 	TipoParto            string `json:"tipo_parto"`
+	Parentesco           string `json:"parentesco"`
 	TuvoComplicaciones   string `json:"tuvo_complicaciones"`
 	ComplicacionReferida string `json:"complicacion_referida"`
 	ComplicacionRecabada string `json:"complicacion_recabada"`
@@ -158,6 +162,7 @@ type Form8Request struct {
 }
 
 type Form8_1 struct {
+	Parentesco string `json:"parentesco"`
 	AñoPerdida string `json:"año_perdida"`
 	Trimestre  string `json:"trimestre"`
 }
@@ -169,6 +174,7 @@ type Form8_1Request struct {
 }
 
 type Form9 struct {
+	Parentesco           string `json:"parentesco"`
 	BajoPeso             bool   `json:"bajo_peso"`
 	Prematuro            bool   `json:"prematuro"`
 	Malformacion         bool   `json:"malformacion"`
@@ -183,6 +189,7 @@ type Form9Request struct {
 }
 
 type Form9_1 struct {
+	Parentesco       string `json:"parentesco"`
 	Año              string `json:"año"`
 	ProblemaReferido string `json:"problema_referido"`
 	ProblemaRecabado string `json:"problema_recabado"`
@@ -195,6 +202,7 @@ type Form9_1Request struct {
 }
 
 type Form10 struct {
+	Parentesco           string `json:"parentesco"`
 	DiscapacidadReferida string `json:"discapacidad_referida"`
 	DiscapacidadRecabada string `json:"discapacidad_recabada"`
 	TipoCondicion        string `json:"tipo_condicion"`
@@ -207,6 +215,7 @@ type Form10Request struct {
 }
 
 type Form10_1 struct {
+	Parentesco       string `json:"parentesco"`
 	SiDonde          string `json:"si_donde"`
 	NoPorque         string `json:"no_porque"`
 	TieneCertificado string `json:"tiene_certificado"`
@@ -219,6 +228,7 @@ type Form10_1Request struct {
 }
 
 type Form11 struct {
+	Parentesco     string `json:"parentesco"`
 	NombreFarmaco  string `json:"nombre_farmaco"`
 	EsPrescrito    string `json:"es_prescrito"`
 	MotivoReferido string `json:"motivo_referido"`
@@ -253,7 +263,8 @@ type Form1213Request struct {
 }
 
 type Form14 struct {
-	Tiempo string `json:"tiempo"`
+	Parentesco string `json:"parentesco"`
+	Tiempo     string `json:"tiempo"`
 }
 
 type Form14Request struct {

@@ -267,6 +267,7 @@ func (u *surveyService) CreateForm5(form interface{}) error {
 		res = append(res, domain.Table5{
 			EncuestadorID:      encuestador.ID,
 			ZonaID:             zona.ID,
+			Parentesco:         integrante.Parentesco,
 			EnfermedadReferida: integrante.EnfermedadReferida,
 			EnfermedadRecabada: integrante.EnfermedadRecabada,
 		})
@@ -315,6 +316,7 @@ func (u *surveyService) CreateForm6(form interface{}) error {
 		res = append(res, domain.Table6{
 			EncuestadorID:     encuestador.ID,
 			ZonaID:            zona.ID,
+			Parentesco:        integrante.Parentesco,
 			Sexo:              integrante.Sexo,
 			AñoFallecimiento:  AñoFallecimiento,
 			EdadFallecimiento: EdadFallecimiento,
@@ -368,6 +370,7 @@ func (u *surveyService) CreateForm7(form interface{}) error {
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona.ID,
 			Sexo:          integrante.Sexo,
+			Parentesco:    integrante.Parentesco,
 			EdadDetection: EdadDetection,
 			AñoDetection:  AñoDetection,
 			TipoReferido:  integrante.TipoReferido,
@@ -414,6 +417,7 @@ func (u *surveyService) CreateForm8(form interface{}) error {
 		res = append(res, domain.Table8{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona.ID,
+			Parentesco:           integrante.Parentesco,
 			AñoNacimientoPerdida: AñoNacimientoPerdida,
 			EnCurso:              integrante.EnCurso,
 			TipoParto:            integrante.TipoParto,
@@ -462,6 +466,7 @@ func (u *surveyService) CreateForm8_1(form interface{}) error {
 		res = append(res, domain.Table8_1{
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona.ID,
+			Parentesco:    integrante.Parentesco,
 			AñoPerdida:    AñoPerdida,
 			Trimestre:     integrante.Trimestre,
 		})
@@ -500,6 +505,7 @@ func (u *surveyService) CreateForm9(form interface{}) error {
 		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona.ID,
+			Parentesco:           integrante.Parentesco,
 			BajoPeso:             integrante.BajoPeso,
 			Prematuro:            integrante.Prematuro,
 			Malformacion:         integrante.Malformacion,
@@ -546,6 +552,7 @@ func (u *surveyService) CreateForm9_1(form interface{}) error {
 		res = append(res, domain.Table9_1{
 			EncuestadorID:    encuestador.ID,
 			ZonaID:           zona.ID,
+			Parentesco:       integrante.Parentesco,
 			Año:              año,
 			ProblemaReferido: integrante.ProblemaReferido,
 			ProblemaRecabado: integrante.ProblemaRecabado,
@@ -585,6 +592,7 @@ func (u *surveyService) CreateForm10(form interface{}) error {
 		res = append(res, domain.Table10{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona.ID,
+			Parentesco:           integrante.Parentesco,
 			DiscapacidadReferida: integrante.DiscapacidadReferida,
 			DiscapacidadRecabada: integrante.DiscapacidadRecabada,
 			TipoCondicion:        integrante.TipoCondicion,
@@ -624,6 +632,7 @@ func (u *surveyService) CreateForm10_1(form interface{}) error {
 		res = append(res, domain.Table10_1{
 			EncuestadorID:    encuestador.ID,
 			ZonaID:           zona.ID,
+			Parentesco:       integrante.Parentesco,
 			SiDonde:          integrante.SiDonde,
 			NoPorque:         integrante.NoPorque,
 			TieneCertificado: integrante.TieneCertificado,
@@ -663,6 +672,7 @@ func (u *surveyService) CreateForm11(form interface{}) error {
 		res = append(res, domain.Table11{
 			EncuestadorID:  encuestador.ID,
 			ZonaID:         zona.ID,
+			Parentesco:     integrante.Parentesco,
 			NombreFarmaco:  integrante.NombreFarmaco,
 			EsPrescrito:    integrante.EsPrescrito,
 			MotivoReferido: integrante.MotivoReferido,
@@ -784,6 +794,7 @@ func (u *surveyService) CreateForm14(form interface{}) error {
 		res = append(res, domain.Table14{
 			EncuestadorID: encuestador.ID,
 			ZonaID:        zona.ID,
+			Parentesco:    integrante.Parentesco,
 			Tiempo:        integrante.Tiempo,
 		})
 	}
