@@ -142,7 +142,7 @@ type Form7 struct {
 type Form7Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
-	Form7            []Form7 `json:"form7"`
+	Form7            []Form7 `json:"integrante"`
 }
 
 type Form8 struct {
@@ -150,7 +150,7 @@ type Form8 struct {
 	EnCurso              string `json:"en_curso"`
 	TipoParto            string `json:"tipo_parto"`
 	Parentesco           string `json:"parentesco"`
-	TuvoComplicaciones   string `json:"tuvo_complicaciones"`
+	TuvoComplicaciones   string `json:"tuvo_complicacion"`
 	ComplicacionReferida string `json:"complicacion_referida"`
 	ComplicacionRecabada string `json:"complicacion_recabada"`
 }
@@ -158,7 +158,7 @@ type Form8 struct {
 type Form8Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
-	Form8            []Form8 `json:"form8"`
+	Form8            []Form8 `json:"integrante"`
 }
 
 type Form8_1 struct {
@@ -170,14 +170,14 @@ type Form8_1 struct {
 type Form8_1Request struct {
 	EncuestadorEmail string    `json:"email"`
 	Zona             Zona      `json:"zona"`
-	Form8_1          []Form8_1 `json:"form8_1"`
+	Form8_1          []Form8_1 `json:"integrante"`
 }
 
 type Form9 struct {
 	Parentesco           string `json:"parentesco"`
-	BajoPeso             bool   `json:"bajo_peso"`
-	Prematuro            bool   `json:"prematuro"`
-	Malformacion         bool   `json:"malformacion"`
+	BajoPeso             string `json:"bajo_peso"`
+	Prematuro            string `json:"prematuro"`
+	Malformacion         string `json:"malformacion"`
 	MalformacionReferida string `json:"malformacion_referida"`
 	MalformacionRecabada string `json:"malformacion_recabada"`
 }

@@ -502,13 +502,31 @@ func (u *surveyService) CreateForm9(form interface{}) error {
 
 	for _, integrante := range formReq.Integrante {
 
+		var (
+			bajoPeso     bool
+			prematuro    bool
+			malformacion bool
+		)
+
+		if integrante.BajoPeso == "on" {
+			bajoPeso = true
+		}
+
+		if integrante.Prematuro == "on" {
+			prematuro = true
+		}
+
+		if integrante.Malformacion == "on" {
+			malformacion = true
+		}
+
 		res = append(res, domain.Table9{
 			EncuestadorID:        encuestador.ID,
 			ZonaID:               zona.ID,
 			Parentesco:           integrante.Parentesco,
-			BajoPeso:             integrante.BajoPeso,
-			Prematuro:            integrante.Prematuro,
-			Malformacion:         integrante.Malformacion,
+			BajoPeso:             bajoPeso,
+			Prematuro:            prematuro,
+			Malformacion:         malformacion,
 			MalformacionReferida: integrante.MalformacionReferida,
 			MalformacionRecabada: integrante.MalformacionRecabada,
 		})
