@@ -76,7 +76,7 @@ func (r *gormStore) CreateForm4(req interface{}) error {
 	if !ok {
 		return fmt.Errorf("error casting to []domain.Table4")
 	}
-	fmt.Println(form)
+	
 	err := r.db.Create(&form).Error
 	if err != nil {
 		return err
