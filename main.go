@@ -41,9 +41,10 @@ func Start(port string) {
 	r.Use(cors.New(config))
 
 	var dbHandler domain.FormDB
+	var weddingDbHandler domain.WeddingDB
 	var err error
 
-	dbHandler, err = db.NewGormStore()
+	dbHandler, weddingDbHandler, err = db.NewGormStore()
 
 	if err != nil {
 		panic(err)
@@ -52,7 +53,10 @@ func Start(port string) {
 	service := app.NewSurveyService(dbHandler)
 	handler := ihttp.NewHandler(service)
 
-	ihttp.SetupRoutes(r, handler)
+	weddingService := app.NewWeddingService(weddingDbHandler)
+	weddingHandler := ihttp.NewWeddingHandler(weddingService)
+
+	ihttp.SetupRoutes(r, handler, weddingHandler)
 
 	r.Run(":" + port)
 }

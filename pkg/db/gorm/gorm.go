@@ -15,7 +15,7 @@ type gormStore struct {
 	db *gorm.DB
 }
 
-func NewGormStore() (domain.FormDB, error) {
+func NewGormStore() (domain.FormDB, domain.WeddingDB, error) {
 
 	local := true
 
@@ -56,7 +56,7 @@ func NewGormStore() (domain.FormDB, error) {
 	}
 
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if migrate == "true" {
@@ -74,5 +74,5 @@ func NewGormStore() (domain.FormDB, error) {
 	sql.SetConnMaxLifetime(60)
 
 	fmt.Println("Successfully connected to database!")
-	return &gormStore{db: dbHandler}, nil
+	return &gormStore{db: dbHandler}, &gormStore{db: dbHandler}, nil
 }

@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(router *gin.Engine, handler *Handler) {
+func SetupRoutes(router *gin.Engine, handler *Handler, WeddingHandler *WeddingHandler) {
 
 	router.GET("/", handler.HelloWorld)
 
@@ -37,4 +37,9 @@ func SetupRoutes(router *gin.Engine, handler *Handler) {
 
 	}
 
+	wedding := public.Group("/wedding")
+	{
+		wedding.POST("/firstOrCreateUserWedding", WeddingHandler.FirstOrCreateUserWedding)
+		wedding.POST("/confirmarInvitado", WeddingHandler.ConfirmarInvitado)
+	}
 }
