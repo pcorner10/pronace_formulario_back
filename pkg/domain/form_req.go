@@ -158,7 +158,7 @@ type Form8 struct {
 type Form8Request struct {
 	EncuestadorEmail string  `json:"email"`
 	Zona             Zona    `json:"zona"`
-	Form8            []Form8 `json:"integrante"`
+	Form8            []Form8 `json:"form8"`
 }
 
 type Form8_1 struct {
